@@ -46,6 +46,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  */
+
+require_once 'functions.php';
+
 class Solar
 {
     /**
@@ -589,9 +592,4 @@ class Solar
             }
         }
     }
-}
-
-function array_value(&$array, $value)
-{
-    return (isset($array[$value]) ? $array[$value] : null);
 }
