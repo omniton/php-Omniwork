@@ -47,8 +47,6 @@
  *
  */
 
-require_once 'functions.php';
-
 class Solar
 {
     /**

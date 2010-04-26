@@ -14,7 +14,8 @@ define('PATH_SYSTEM', empty($_SERVER['PATH_SYSTEM']) ? PATH_ROOT . DIRECTORY_SEP
 // set the include-path
 set_include_path(PATH_ROOT . PATH_SEPARATOR . PATH_SYSTEM);
 
-// load Solar
+// load extended functions & Solar
+require_once 'functions.php';
 require_once 'Solar.php';
 
 // start Solar with config file
