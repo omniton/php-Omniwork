@@ -11,7 +11,7 @@ $config['Solar_Sql'] = array(
 
 // session stuff
 $config['Solar_Session'] = array(
-    'handler' => array('adapter' => 'Solar_Session_Handler_Adapter_Sql'),
+    'handler' => array('adapter' => 'Solar_Session_Handler_Adapter_Native'),
     'name' => 'session',
     'lifetime' => 0,
     'path' => '/',
