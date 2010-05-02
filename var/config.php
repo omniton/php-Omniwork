@@ -5,8 +5,9 @@ $config['Solar_Sql'] = array(
     'adapter' => 'Solar_Sql_Adapter_Mysql',
     'host' => 'localhost', // the database server host
     'name' => '',  // the database name
-    'user' => '',  // authenticate as this user
+    'user' => 'root',  // authenticate as this user
     'pass' => '',  // authenticate with this password
+    'charset' => 'utf8',  // use utf8 charecter set
 );
 
 // session stuff
