@@ -71,6 +71,7 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
         'name'      => null,
         'post_connect_command' => null,
         'profiling' => false,
+        'charset'   => null,
         'cache'     => array('adapter' => 'Solar_Cache_Adapter_Var'),
     );
 
@@ -482,10 +483,6 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
 
         // post-connection tasks
         $this->_postConnect();
-
-        if ($this->_config['post_connect_command']) {
-            $this->query($this->_config['post_connect_command']);
-        }
 
         // retain the profile data?
         $this->_addProfile($time, '__CONNECT');

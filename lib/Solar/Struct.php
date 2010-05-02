@@ -70,7 +70,7 @@
  * 
  * @license http://opensource.org/licenses/bsd-license.php BSD
  * 
- * @version $Id: Struct.php 4416 2010-02-23 19:52:43Z pmjones $
+ * @version $Id: Struct.php 4516 2010-03-15 19:17:24Z pmjones $
  * 
  */
 class Solar_Struct extends Solar_Base implements ArrayAccess, Countable, IteratorAggregate
@@ -230,7 +230,7 @@ class Solar_Struct extends Solar_Base implements ArrayAccess, Countable, Iterato
      */
     public function __toString()
     {
-        return serialize($this->_data);
+        return serialize($this->toArray());
     }
     
     /**

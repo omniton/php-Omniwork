@@ -12,7 +12,7 @@
  * 
  * @license http://opensource.org/licenses/bsd-license.php BSD
  * 
- * @version $Id: NamedAction.php 4506 2010-03-08 22:37:19Z pmjones $
+ * @version $Id: NamedAction.php 4515 2010-03-15 16:42:04Z pmjones $
  * 
  */
 class Solar_View_Helper_NamedAction extends Solar_View_Helper
@@ -36,9 +36,9 @@ class Solar_View_Helper_NamedAction extends Solar_View_Helper
     public function namedAction($name, $data = null, $text = null, $attribs = null)
     {
         // get an escaped href rewrite value
-        $href = $this->_view->namedActionHref($name, $data);
+        $uri = $this->_view->namedActionUri($name, $data);
         
         // now build using action helper
-        return $this->_view->action($href, $text, $attribs);
+        return $this->_view->action($uri, $text, $attribs);
     }
 }

@@ -13,7 +13,7 @@
  * 
  * @license http://opensource.org/licenses/bsd-license.php BSD
  * 
- * @version $Id: Related.php 4489 2010-03-02 15:34:14Z pmjones $
+ * @version $Id: Related.php 4514 2010-03-15 15:06:16Z pmjones $
  * 
  */
 abstract class Solar_Sql_Model_Related extends Solar_Base {
@@ -656,6 +656,12 @@ abstract class Solar_Sql_Model_Related extends Solar_Base {
             $eager->merge($this->merge);
         }
         
+        // if a condition is present, and no join type is specified, make it
+        // an inner join. this is to mimic WHERE behavior.
+        if ($eager['conditions'] && ! $eager['join_type']) {
+            $eager->joinType('inner');
+        }
+        
         // always need a join type
         if (! $eager['join_type']) {
             $eager->joinType('left');
@@ -663,11 +669,6 @@ abstract class Solar_Sql_Model_Related extends Solar_Base {
         
         // for inner joins, always join to the main fetch
         if ($eager['join_type'] == 'inner') {
-            $eager->joinFlag(true);
-        }
-        
-        // if a join condition is present, always join to the main fetch
-        if ($eager['conditions']) {
             $eager->joinFlag(true);
         }
         
