@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateIpv4 extends Test_Solar_Filter_Abstract {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateIpv4 = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates that the value is a legal IPv4 address.
-     * 
+     *
      */
     public function testValidateIpv4()
     {
@@ -35,7 +35,7 @@ class Test_Solar_Filter_ValidateIpv4 extends Test_Solar_Filter_Abstract {
             $this->assertTrue($this->_filter->validateIpv4($val));
         }
     }
-    
+
     public function testValidateIpv4_badOrBlank()
     {
         $test = array(
@@ -56,7 +56,7 @@ class Test_Solar_Filter_ValidateIpv4 extends Test_Solar_Filter_Abstract {
             $this->assertFalse($this->_filter->validateIpv4($val));
         }
     }
-    
+
     public function testValidateIpv4_notRequired()
     {
         $this->_filter->setRequire(false);

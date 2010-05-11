@@ -1,91 +1,91 @@
 <?php
 /**
- * 
+ *
  * Block plugin to create ordered and unordered lists.
- * 
+ *
  * Start a line with `-`, `+`, or `*` (and a space) to
  * indicate an unordered bullet list.
- * 
+ *
  * Start a line with a number and period (and a space)
  * (for example `1. `) to indicate a numbered list.
- * 
+ *
  * @category Solar
- * 
+ *
  * @package Solar_Markdown
- * 
+ *
  * @author John Gruber <http://daringfireball.net/projects/markdown/>
- * 
+ *
  * @author Michel Fortin <http://www.michelf.com/projects/php-markdown/>
- * 
+ *
  * @author Paul M. Jones <pmjones@solarphp.com>
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  * @version $Id: List.php 3153 2008-05-05 23:14:16Z pmjones $
- * 
+ *
  */
 class Solar_Markdown_Plugin_List extends Solar_Markdown_Plugin
 {
     /**
-     * 
+     *
      * This is a block plugin.
-     * 
+     *
      * @var bool
-     * 
+     *
      */
     protected $_is_block = true;
-    
+
     /**
-     * 
+     *
      * These should be encoded as special Markdown characters.
-     * 
+     *
      * @var string
-     * 
+     *
      */
     protected $_chars = '-+*';
-    
+
     /**
-     * 
+     *
      * Tracks the current level of nested lists.
-     * 
+     *
      * @var int
-     * 
+     *
      */
     protected $_list_level = 0;
-    
+
     /**
-     * 
+     *
      * Resets for a new transformation.
-     * 
+     *
      * @return void
-     * 
+     *
      */
     public function reset()
     {
         parent::reset();
         $this->_list_level = 0;
     }
-    
+
     /**
-     * 
+     *
      * Makes ordered (numbered) and unordered (bulleted) XHTML lists.
-     * 
+     *
      * @param string $text Portion of the Markdown source text.
-     * 
+     *
      * @return string The transformed XHTML.
-     * 
+     *
      */
     public function parse($text)
     {
         $less_than_tab = $this->_getTabWidth() - 1;
-        
+
         // Re-usable patterns to match list item bullets and number markers:
         $marker_ul  = '[*+-]';
         $marker_ol  = '\d+[.]';
         $marker_any = "(?:$marker_ul|$marker_ol)";
-        
+
         $markers = array($marker_ul, $marker_ol);
-        
+
         foreach ($markers as $marker) {
             // Re-usable pattern to match any entire ul or ol list:
             $whole_list = '
@@ -108,7 +108,7 @@ class Solar_Markdown_Plugin_List extends Solar_Markdown_Plugin
                   )
                 )
             '; // mx
-        
+
             // We use a different prefix before nested lists than top-level lists.
             // See extended comment in _ProcessListItems().
             if ($this->_list_level) {
@@ -116,31 +116,31 @@ class Solar_Markdown_Plugin_List extends Solar_Markdown_Plugin
                         ^
                         '.$whole_list.'
                     }mx',
-                    array($this, '_parse'),
-                    $text
+                array($this, '_parse'),
+                $text
                 );
             } else {
                 $text = preg_replace_callback('{
                         (?:(?<=\n\n)|\A\n?)
                         '.$whole_list.'
                     }mx',
-                    array($this, '_parseNested'),
-                    $text
+                array($this, '_parseNested'),
+                $text
                 );
             }
         }
-        
+
         return $text;
     }
-    
+
     /**
-     * 
+     *
      * Support callback for top-level list blocks.
-     * 
+     *
      * @param array $matches Matches from preg_replace_callback().
-     * 
+     *
      * @return string The replacement text.
-     * 
+     *
      */
     protected function _parse($matches)
     {
@@ -148,30 +148,30 @@ class Solar_Markdown_Plugin_List extends Solar_Markdown_Plugin
         $marker_ul  = '[*+-]';
         $marker_ol  = '\d+[.]';
         $marker_any = "(?:$marker_ul|$marker_ol)";
-    
+
         $list = $matches[1];
         $list_type = preg_match("/$marker_ul/", $matches[3]) ? "ul" : "ol";
-    
+
         $marker_any = ( $list_type == "ul" ? $marker_ul : $marker_ol );
-    
+
         // Turn double returns into triple returns, so that we can make a
         // paragraph for the last item in a list, if necessary:
         $list = preg_replace("/\n{2,}/", "\n\n\n", $list);
         $result = $this->_processItems($list, $marker_any);
-        
+
         return $this->_toHtmlToken("<$list_type>" . $result . "</$list_type>") . "\n";
     }
-    
+
     /**
-     * 
+     *
      * Support callback for nested lists.
-     * 
+     *
      * @todo How is this different from top-level lists?
-     * 
+     *
      * @param string $matches Matches from preg_replace_callback().
-     * 
+     *
      * @return string The replacement text.
-     * 
+     *
      */
     protected function _parseNested($matches)
     {
@@ -179,32 +179,32 @@ class Solar_Markdown_Plugin_List extends Solar_Markdown_Plugin
         $marker_ul  = '[*+-]';
         $marker_ol  = '\d+[.]';
         $marker_any = "(?:$marker_ul|$marker_ol)";
-    
+
         $list = $matches[1];
         $list_type = preg_match("/$marker_ul/", $matches[3]) ? "ul" : "ol";
-    
+
         $marker_any = ( $list_type == "ul" ? $marker_ul : $marker_ol );
-    
+
         // Turn double returns into triple returns, so that we can make a
         // paragraph for the last item in a list, if necessary:
         $list = preg_replace("/\n{2,}/", "\n\n\n", $list);
         $result = $this->_processItems($list, $marker_any);
         return $this->_toHtmlToken("<$list_type>\n" . $result . "</$list_type>") . "\n\n"; // extra \n?
     }
-    
-    
+
+
     /**
-     * 
+     *
      * Process the contents of a single ordered or unordered
      * list, splitting it into individual list items.
-     * 
+     *
      * @param string $list_str The source text of the list block.
-     * 
+     *
      * @param string $marker_any The list-style markers to use when
      * identifying list items.
-     * 
+     *
      * @return string The replacement text.
-     * 
+     *
      */
     protected function _processItems($list_str, $marker_any)
     {
@@ -229,10 +229,10 @@ class Solar_Markdown_Plugin_List extends Solar_Markdown_Plugin
         // change the syntax rules such that sub-lists must start with a
         // starting cardinal number; for example "1." or "a.".
         $this->_list_level ++;
-        
+
         // trim trailing blank lines:
         $list_str = preg_replace("/\n{2,}\\z/", "\n", $list_str);
-        
+
         // process items
         $list_str = preg_replace_callback('{
                 (\n)?                          # leading line = $1
@@ -242,29 +242,29 @@ class Solar_Markdown_Plugin_List extends Solar_Markdown_Plugin
                 (\n{1,2}))
                 (?= \n* (\z | \2 ('.$marker_any.') [ \t]+))
             }xm',
-            array($this, '_processItemsCallback'),
-            $list_str
+        array($this, '_processItemsCallback'),
+        $list_str
         );
-        
+
         $this->_list_level --;
         return $list_str;
     }
-    
+
     /**
-     * 
+     *
      * Support callback for processing list items.
-     * 
+     *
      * @param array $matches Matches from preg_replace_callback().
-     * 
+     *
      * @return string The replacement text.
-     * 
+     *
      */
     protected function _processItemsCallback($matches)
     {
         $item = $matches[4];
         $leading_line =& $matches[1];
         $leading_space =& $matches[2];
-        
+
         if ($leading_line || preg_match('/\n{2,}/', $item)) {
             $item = $this->_processBlocks($this->_outdent($item));
         } else {
@@ -273,7 +273,7 @@ class Solar_Markdown_Plugin_List extends Solar_Markdown_Plugin
             $item = preg_replace('/\n+$/', '', $item);
             $item = $this->_processSpans($item);
         }
-        
+
         return "<li>$item</li>\n";
     }
 }

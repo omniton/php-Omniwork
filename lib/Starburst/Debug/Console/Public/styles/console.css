@@ -1,129 +1,130 @@
 /* debugger console */
 #starburst_debug_console-open {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #640203;
-    padding: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #640203;
+	padding: 10px;
 }
 
 #starburst_debug_console {
-    width: 700px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: #640203;
-    color: #000;
-    background-image: url(../../Starburst_Debug_Console/images/solar.ico);
-    background-repeat: no-repeat;
-    background-position: 4px 4px;
-    display: none;
+	width: 700px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background-color: #640203;
+	color: #000;
+	background-image: url(../../Starburst_Debug_Console/images/solar.ico);
+	background-repeat: no-repeat;
+	background-position: 4px 4px;
+	display: none;
 }
 
 #starburst_debug_console-close {
-    position: absolute;
-    top: 0;
-    right: 5px;
-    line-height: 2.2em;
+	position: absolute;
+	top: 0;
+	right: 5px;
+	line-height: 2.2em;
 }
 
-#starburst_debug_console a,
-#starburst_debug_console-open a {
-    color: #FDDD9A;
-    font-weight: bold;
+#starburst_debug_console a,#starburst_debug_console-open a {
+	color: #FDDD9A;
+	font-weight: bold;
 }
 
 #starburst_debug_console pre {
-    background: transparent;
-    color: #000;
-    margin: 2px;
-    padding: 0;
-    overflow: visible;
-    white-space: pre-wrap;       /* css-3 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	background: transparent;
+	color: #000;
+	margin: 2px;
+	padding: 0;
+	overflow: visible;
+	white-space: pre-wrap; /* css-3 */
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
 #starburst_debug_console .tabs {
-    margin: 0;
-    margin-left: 25px;
-    list-style: none;
+	margin: 0;
+	margin-left: 25px;
+	list-style: none;
 }
 
 #starburst_debug_console .tabs li {
-    display: inline;
-    margin: 0 5px 0 5px;
-    line-height: 2.2em;
+	display: inline;
+	margin: 0 5px 0 5px;
+	line-height: 2.2em;
 }
 
 #starburst_debug_console .tabs li a {
-    padding: 2px 4px;
+	padding: 2px 4px;
 }
 
 #starburst_debug_console .tabs li.active a {
-    background-color: #4E0202;
+	background-color: #4E0202;
 }
 
 #starburst_debug_console .content {
-    padding: 10px;
+	padding: 10px;
 }
 
 #starburst_debug_console .content div {
-    overflow: auto;
-    background-color: #fff;
-    height: 500px;
+	overflow: auto;
+	background-color: #fff;
+	height: 500px;
 }
 
 /* content tables */
 #starburst_debug_console .content div table {
-    width: 100%;
-    border-collapse: collapse;
+	width: 100%;
+	border-collapse: collapse;
 }
 
 #starburst_debug_console .content div table td {
-    padding: 4px;
-    border: 1px solid #e1e1e1;
-    background-color: #fff;
+	padding: 4px;
+	border: 1px solid #e1e1e1;
+	background-color: #fff;
 }
 
 #starburst_debug_console .content div ul li {
-    display: list-item;
-    background-color: #fff;
-    margin: 0;
-    padding: 0;
+	display: list-item;
+	background-color: #fff;
+	margin: 0;
+	padding: 0;
 }
 
 /* Solar_Log viewer */
 #content-solar_log table {
-    border-collapse: collapse;
+	border-collapse: collapse;
 }
 
 #content-solar_log table tr.debug td {
-    background-color: #e8f0d7;
+	background-color: #e8f0d7;
 }
 
 #content-solar_log table tr.notice td {
+	
 }
 
 #content-solar_log table tr.warning td {
-    background-color: #faecec;
+	background-color: #faecec;
 }
 
 #content-solar_log table td.class {
-    width: 20%;
+	width: 20%;
 }
 
 #content-solar_log table td.event {
-    width: 15%;
+	width: 15%;
 }
 
 /* Solar_Request */
 #content-solar_request table {
+	
 }
 
 #content-solar_request table td.key {
-    text-align: right;
-    font-weight: bold;
+	text-align: right;
+	font-weight: bold;
 }

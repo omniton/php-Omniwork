@@ -59,13 +59,13 @@ class Solar_Mail_Transport_Adapter_File extends Solar_Mail_Transport_Adapter
     protected function _send()
     {
         $file = Solar_Dir::fix($this->_config['dir'])
-              . $this->_config['prefix']
-              . date('Y-m-d_H-i-s')
-              . '.' . substr(microtime(), 2, 6);
+        . $this->_config['prefix']
+        . date('Y-m-d_H-i-s')
+        . '.' . substr(microtime(), 2, 6);
 
         $text = $this->_headersToString($this->_mail->fetchHeaders())
-              . $this->_mail->getCrlf()
-              . $this->_mail->fetchContent();
+        . $this->_mail->getCrlf()
+        . $this->_mail->fetchContent();
 
         $result = file_put_contents($file, $text);
 

@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateUri extends Test_Solar_Filter_Abstract {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateUri = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates the value as a URI.
-     * 
+     *
      */
     public function testValidateUri()
     {
@@ -35,7 +35,7 @@ class Test_Solar_Filter_ValidateUri extends Test_Solar_Filter_Abstract {
             $this->assertTrue($this->_filter->validateUri($val));
         }
     }
-    
+
     public function testValidateUri_badOrBlank()
     {
         $test = array(
@@ -52,7 +52,7 @@ class Test_Solar_Filter_ValidateUri extends Test_Solar_Filter_Abstract {
             $this->assertFalse($this->_filter->validateUri($val));
         }
     }
-    
+
     public function testValidateUri_notRequired()
     {
         $this->_filter->setRequire(false);

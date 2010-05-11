@@ -1,16 +1,16 @@
 <?php
 /**
- * 
+ *
  * Locale file; returns the strings for the de_DE language.
- * 
+ *
  * @category Solar
- * 
+ *
  * @package Solar_Filter
- * 
+ *
  * @author Bahtiar `kalkin` Gadimov <bahtiar@gadimov.de>
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  */
 return array(
     'INVALID_ALNUM'                     => 'Bitte geben Sie nur Buchstaben (A-Z und a-z) und Zahlen (0-9) ein.',

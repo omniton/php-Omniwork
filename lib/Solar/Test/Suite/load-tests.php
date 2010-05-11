@@ -10,7 +10,7 @@ function solar_load_test_files($dir)
     foreach ($list as $class_file) {
         include_once $class_file;
     }
-    
+
     $list = glob($dir . DIRECTORY_SEPARATOR . "[A-Z]*", GLOB_ONLYDIR);
     foreach ($list as $sub) {
         solar_load_test_files($sub);
@@ -40,10 +40,10 @@ $only = (bool) $_SERVER['argv'][4];
 
 // find the top-level file for the class
 $class_file = $dir
-            . DIRECTORY_SEPARATOR
-            . str_replace('_', DIRECTORY_SEPARATOR, $class)
-            . ".php";
-            
+. DIRECTORY_SEPARATOR
+. str_replace('_', DIRECTORY_SEPARATOR, $class)
+. ".php";
+
 if (file_exists($class_file) && is_readable($class_file)) {
     require_once $class_file;
 }
@@ -65,41 +65,41 @@ foreach ($test_classes as $test_class) {
     if (substr($test_class, 0, 5) != 'Test_') {
         continue;
     }
-    
+
     // ignore abstracts and interfaces
     $reflect = new ReflectionClass($test_class);
     if ($reflect->isAbstract() || $reflect->isInterface()) {
         continue;
     }
-    
+
     // is it an "only" class?
     if ($only && $test_class != $class) {
         continue;
     }
-    
+
     // find all the test*() methods in the Test_* class
     $test_methods = get_class_methods($test_class);
     foreach ($test_methods as $test_method) {
-        
+
         // skip non test*() methods
         if (substr($test_method, 0, 4) != 'test') {
             continue;
         }
-        
+
         // are we looking for only one method to test?
         if ($only && $method) {
-            
+
             // match only the one exact method
             if ($method != $test_method) {
                 continue;
             }
-            
+
             // add only this one method to the plan, and break out
             $data['plan'] ++;
             $data['tests'][$test_class][] = $test_method;
             break;
         }
-        
+
         // not looking for only one method
         if ($method) {
             // look for a matching prefix

@@ -1,31 +1,31 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_View_Helper_FormOptions extends Test_Solar_View_Helper {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_View_Helper_FormOptions = array(
     );
-    
+
     // -----------------------------------------------------------------
-    // 
+    //
     // Test methods.
-    // 
+    //
     // -----------------------------------------------------------------
-    
+
     /**
-     * 
+     *
      * Test -- Generates a list of options.
-     * 
+     *
      */
     public function testFormOptions()
     {
@@ -34,9 +34,9 @@ class Test_Solar_View_Helper_FormOptions extends Test_Solar_View_Helper {
                 'foo' => 'bar',
                 'baz' => 'dib',
                 'zim' => 'gir',
-            ),
+        ),
         );
-        
+
         // no selection
         $actual = $this->_view->formOptions($info);
         $tmp = array();
@@ -45,7 +45,7 @@ class Test_Solar_View_Helper_FormOptions extends Test_Solar_View_Helper {
         $tmp[] = '<option value="zim" label="gir">gir</option>';
         $expect = implode("\n", $tmp);
         $this->assertSame($actual, $expect);
-        
+
         // selected
         $info['value'] = 'baz';
         $actual = $this->_view->formOptions($info);

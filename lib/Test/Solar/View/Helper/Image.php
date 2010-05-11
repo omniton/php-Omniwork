@@ -1,31 +1,31 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_View_Helper_Image extends Test_Solar_View_Helper {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_View_Helper_Image = array(
     );
-    
+
     // -----------------------------------------------------------------
-    // 
+    //
     // Test methods.
-    // 
+    //
     // -----------------------------------------------------------------
-    
+
     /**
-     * 
+     *
      * Test -- Returns an <img ...
-     * 
+     *
      */
     public function testImage()
     {

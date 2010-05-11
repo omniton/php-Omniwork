@@ -1,22 +1,22 @@
 <?php
 /**
- * 
+ *
  * Locale file.  Returns the strings for a specific language.
- * 
+ *
  * @category Solar
- * 
+ *
  * @package Solar_Locale
- * 
+ *
  * @author Paul M. Jones <pmjones@solarphp.com>
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  * @version $Id: en_US.php 4496 2010-03-04 18:45:57Z pmjones $
- * 
+ *
  */
 return array(
-    
-    // formatting codes and information
+
+// formatting codes and information
     'FORMAT_LANGUAGE'            => 'English',
     'FORMAT_COUNTRY'             => 'United States',
     'FORMAT_CURRENCY'            => '$%s', // printf()
@@ -24,8 +24,8 @@ return array(
     'FORMAT_THOUSANDS_SEP'       => ',', // number_format
     'FORMAT_DATE'                => '%b %d, %Y', // strftime(): Mar 19, 2005
     'FORMAT_TIME'                => '%r', // strftime: 12-hour am/pm
-    
-    // action processes
+
+// action processes
     'PROCESS_ADD'                => 'Add',
     'PROCESS_CANCEL'             => 'Cancel',
     'PROCESS_CREATE'             => 'Create',
@@ -41,8 +41,8 @@ return array(
     'PROCESS_RESET'              => 'Reset',
     'PROCESS_SAVE'               => 'Save',
     'PROCESS_SEARCH'             => 'Search',
-    
-    // controller actions
+
+// controller actions
     'ACTION_BROWSE'              => 'Browse',
     'ACTION_READ'                => 'Read',
     'ACTION_EDIT'                => 'Edit',
@@ -50,8 +50,8 @@ return array(
     'ACTION_DELETE'              => 'Delete',
     'ACTION_SEARCH'              => 'Search',
     'ACTION_NOT_FOUND'           => 'Not Found',
-    
-    // exception error messages  
+
+// exception error messages
     'ERR_CONNECTION_FAILED'      => 'Connection failed.',
     'ERR_CONNECTION_TIMEOUT'     => 'Connection timed out.',
     'ERR_DIR_NOT_FOUND'          => 'Directory "{:dir}" not found.',
@@ -68,24 +68,24 @@ return array(
     'ERR_RMDIR_FAILED'           => 'Failed to remove directory "{:dir}".',
     'ERR_USE_OTHER_METHOD'       => 'Please use another method to set the "{:key}" value.',
     'ERR_CSRF_ATTEMPT'           => 'The request looks like cross-site request forgery.',
-    
-    // success feedback messages
+
+// success feedback messages
     'SUCCESS_FORM'               => 'Saved.',
     'SUCCESS_ADDED'              => 'Added.',
     'SUCCESS_DELETED'            => 'Deleted.',
-    
-    // failure feedback messages  
+
+// failure feedback messages
     'FAILURE_FORM'               => 'Not saved; please correct the noted errors.',
     'FAILURE_INVALID'            => 'Invalid data.',
-    
-    // pagers
+
+// pagers
     'PAGER_PREV'                 => 'Prev',
     'PAGER_NEXT'                 => 'Next',
-    
-    // generic text      
+
+// generic text
     'TEXT_AUTH_USERNAME'         => 'Signed in as',
-    
-    // generic form element labels  
+
+// generic form element labels
     'LABEL_SUBMIT'               => 'Process',
     'LABEL_HANDLE'               => 'Username',
     'LABEL_PASSWD'               => 'Password',

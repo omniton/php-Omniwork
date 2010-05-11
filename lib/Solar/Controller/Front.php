@@ -153,8 +153,8 @@ class Solar_Controller_Front extends Solar_Base
             if ($this->_config[$key]) {
                 $var = "_$key";
                 $this->$var = array_merge(
-                    $this->$var,
-                    (array) $this->_config[$key]
+                $this->$var,
+                (array) $this->_config[$key]
                 );
             }
         }
@@ -371,8 +371,8 @@ class Solar_Controller_Front extends Solar_Base
         $content[] = "<html><head><title>Not Found</title></head><body>";
         $content[] = "<h1>404 Not Found</h1>";
         $content[] = "<p>"
-                   . htmlspecialchars("Page controller class for '$page' not found.")
-                   . "</p>";
+        . htmlspecialchars("Page controller class for '$page' not found.")
+        . "</p>";
 
         if ($this->_config['explain']) {
             $content[] = "<h2>Track</h2>";
@@ -380,8 +380,8 @@ class Solar_Controller_Front extends Solar_Base
             foreach ($this->_explain as $code => $text) {
                 $content[] = "<dt><code>{$code}:</code></dt>";
                 $content[] = "<dd><code>"
-                           . ($text ? htmlspecialchars($text) : "<em>empty</em>")
-                           . "</code></dd>";
+                . ($text ? htmlspecialchars($text) : "<em>empty</em>")
+                . "</code></dd>";
             }
             $content[] = "</dl>";
 

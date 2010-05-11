@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateNotZero extends Test_Solar_Filter_Abstract {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateNotZero = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates that the value is not exactly zero.
-     * 
+     *
      */
     public function testValidateNotZero()
     {
@@ -35,7 +35,7 @@ class Test_Solar_Filter_ValidateNotZero extends Test_Solar_Filter_Abstract {
             $this->assertTrue($this->_filter->validateNotZero($val));
         }
     }
-    
+
     public function testValidateNotZero_badOrBlank()
     {
         // bad (are in fact zero, or are blank)
@@ -47,7 +47,7 @@ class Test_Solar_Filter_ValidateNotZero extends Test_Solar_Filter_Abstract {
             $this->assertFalse($this->_filter->validateNotZero($val));
         }
     }
-    
+
     public function testValidateNotZero_notRequired()
     {
         $this->_filter->setRequire(false);

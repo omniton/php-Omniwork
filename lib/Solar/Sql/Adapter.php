@@ -275,7 +275,7 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
         // set a cache object
         $this->_cache = Solar::dependency(
             'Solar_Cache',
-            $this->_config['cache']
+        $this->_config['cache']
         );
 
         // follow-on setup
@@ -467,9 +467,9 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
 
         // attempt the connection
         $this->_pdo = new PDO(
-            $this->_dsn,
-            $this->_config['user'],
-            $this->_config['pass']
+        $this->_dsn,
+        $this->_config['user'],
+        $this->_config['pass']
         );
 
         // retain connection info
@@ -715,8 +715,8 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
         // bind at query time *or* bind as you go, not both.
         preg_match_all(
             "/\W:([a-zA-Z_][a-zA-Z0-9_]*)/m",
-            $prep->queryString . "\n",
-            $matches
+        $prep->queryString . "\n",
+        $matches
         );
 
         // bind values to placeholders, repeating as needed
@@ -1389,13 +1389,13 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
     {
         // determine count
         $count = ! empty($parts['limit']['count'])
-            ? (int) $parts['limit']['count']
-            : 0;
+        ? (int) $parts['limit']['count']
+        : 0;
 
         // determine offset
         $offset = ! empty($parts['limit']['offset'])
-            ? (int) $parts['limit']['offset']
-            : 0;
+        ? (int) $parts['limit']['offset']
+        : 0;
 
         // add the count and offset
         if ($count > 0) {
@@ -1683,8 +1683,8 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
             return $name;
         } else {
             return $this->_ident_quote_prefix
-                 . $name
-                 . $this->_ident_quote_suffix;
+            . $name
+            . $this->_ident_quote_suffix;
         }
     }
 
@@ -1724,9 +1724,9 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
         // match closing quotes against the same number of opening quotes.
         $list = preg_split(
             "/(($apos+|$quot+|\\$apos+|\\$quot+).*?\\2)/",
-            $spec,
-            -1,
-            PREG_SPLIT_DELIM_CAPTURE
+        $spec,
+        -1,
+        PREG_SPLIT_DELIM_CAPTURE
         );
 
         // concat the pieces back together, quoting names as we go.
@@ -1744,7 +1744,7 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
 
             // is there an apos or quot anywhere in the part?
             $is_string = strpos($val, $apos) !== false ||
-                         strpos($val, $quot) !== false;
+            strpos($val, $quot) !== false;
 
             if ($is_string) {
                 // string literal
@@ -1791,15 +1791,15 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
         $find = "/(\\b)($word)\\.($word)(\\b)/i";
 
         $repl = '$1'
-              . $this->_ident_quote_prefix
-              . '$2'
-              . $this->_ident_quote_suffix
-              . '.'
-              . $this->_ident_quote_prefix
-              . '$3'
-              . $this->_ident_quote_suffix
-              . '$4'
-              ;
+        . $this->_ident_quote_prefix
+        . '$2'
+        . $this->_ident_quote_suffix
+        . '.'
+        . $this->_ident_quote_prefix
+        . '$3'
+        . $this->_ident_quote_suffix
+        . '$4'
+        ;
 
         $text = preg_replace($find, $repl, $text);
 
@@ -2434,46 +2434,46 @@ abstract class Solar_Sql_Adapter extends Solar_Base {
         // basic declaration string
         switch ($type) {
 
-        case 'char':
-        case 'varchar':
-            // does it have a valid size?
-            if ($size < 1 || $size > 255) {
-                throw $this->_exception('ERR_COL_SIZE', array(
+            case 'char':
+            case 'varchar':
+                // does it have a valid size?
+                if ($size < 1 || $size > 255) {
+                    throw $this->_exception('ERR_COL_SIZE', array(
                     'col' => $name,
                     'size' => $size,
-                ));
-            } else {
-                // replace the 'size' placeholder
-                $coldef = $this->_solar_native[$type] . "($size)";
-            }
-            break;
+                    ));
+                } else {
+                    // replace the 'size' placeholder
+                    $coldef = $this->_solar_native[$type] . "($size)";
+                }
+                break;
 
-        case 'numeric':
+            case 'numeric':
 
-            if ($size < 1 || $size > 255) {
-                throw $this->_exception('ERR_COL_SIZE', array(
-                    'col' => $name,
-                    'size' => $size,
-                    'scope' => $scope,
-                ));
-            }
-
-            if ($scope < 0 || $scope > $size) {
-                throw $this->_exception('ERR_COL_SCOPE', array(
+                if ($size < 1 || $size > 255) {
+                    throw $this->_exception('ERR_COL_SIZE', array(
                     'col' => $name,
                     'size' => $size,
                     'scope' => $scope,
-                ));
-            }
+                    ));
+                }
 
-            // replace the 'size' and 'scope' placeholders
-            $coldef = $this->_solar_native[$type] . "($size,$scope)";
+                if ($scope < 0 || $scope > $size) {
+                    throw $this->_exception('ERR_COL_SCOPE', array(
+                    'col' => $name,
+                    'size' => $size,
+                    'scope' => $scope,
+                    ));
+                }
 
-            break;
+                // replace the 'size' and 'scope' placeholders
+                $coldef = $this->_solar_native[$type] . "($size,$scope)";
 
-        default:
-            $coldef = $this->_solar_native[$type];
-            break;
+                break;
+
+            default:
+                $coldef = $this->_solar_native[$type];
+                break;
 
         }
 

@@ -244,7 +244,7 @@ class Solar_Locale extends Solar_Base
     protected function _trans($class, $key, $num = 1, $replace = null)
     {
         if (! array_key_exists($class, $this->trans) ||
-            ! array_key_exists($key, $this->trans[$class])) {
+        ! array_key_exists($key, $this->trans[$class])) {
             // class or class-key does not exist
             return null;
         }

@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateLocaleCode extends Test_Solar_Filter_Abstract {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateLocaleCode = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates that the value is a locale code.
-     * 
+     *
      */
     public function testValidateLocaleCode()
     {
@@ -32,7 +32,7 @@ class Test_Solar_Filter_ValidateLocaleCode extends Test_Solar_Filter_Abstract {
             $this->assertTrue($this->_filter->validateLocaleCode($val));
         }
     }
-    
+
     public function testValidateLocaleCode_badOrBlank()
     {
         $test = array(
@@ -47,7 +47,7 @@ class Test_Solar_Filter_ValidateLocaleCode extends Test_Solar_Filter_Abstract {
             $this->assertFalse($this->_filter->validateLocaleCode($val));
         }
     }
-    
+
     public function testValidateLocaleCode_notRequired()
     {
         $this->_filter->setRequire(false);

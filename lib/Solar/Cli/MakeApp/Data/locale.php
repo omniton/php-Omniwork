@@ -1,3 +1,1 @@
-return array(
-    'TEXT_WELCOME' => 'Welcome to your new application.',
-);
+return array( 'TEXT_WELCOME' => 'Welcome to your new application.', );

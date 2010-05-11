@@ -1,88 +1,88 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Struct extends Solar_Test {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Struct = array(
     );
-    
+
     protected function _newStruct()
     {
         $struct = Solar::factory(
             'Solar_Struct',
-            array(
+        array(
                 'data' => array(
                     'foo' => 'bar',
                     'baz' => 'dib',
                     'zim' => 'gir',
-                ),
-            )
+        ),
+        )
         );
         return $struct;
     }
-    
+
     // -----------------------------------------------------------------
-    // 
+    //
     // Test methods.
-    // 
+    //
     // -----------------------------------------------------------------
-    
+
     /**
-     * 
+     *
      * Test -- Constructor.
-     * 
+     *
      */
     public function test__construct()
     {
         $obj = $this->_newStruct();
         $this->assertInstance($obj, 'Solar_Struct');
     }
-    
+
     public function test__construct_badData()
     {
         $struct = Solar::factory(
             'Solar_Struct',
-            array('data' => null)
+        array('data' => null)
         );
-        
+
         $this->assertSame($struct->toArray(), array());
-        
+
         $struct = Solar::factory(
             'Solar_Struct',
-            array('data' => '')
+        array('data' => '')
         );
-        
+
         $this->assertSame($struct->toArray(), array());
-        
+
         $struct = Solar::factory(
             'Solar_Struct',
-            array('data' => 0)
+        array('data' => 0)
         );
-        
+
         $this->assertSame($struct->toArray(), array());
     }
-    
+
     /**
-     * 
+     *
      * Test -- Gets a data value.
-     * 
+     *
      */
     public function test__get()
     {
         $struct = $this->_newStruct();
         $this->assertSame($struct->foo, 'bar');
         $this->assertSame($struct['foo'], 'bar');
-        
+
         $struct = $this->_newStruct();
         try {
             $invalid = $struct->noSuchKey;
@@ -90,7 +90,7 @@ class Test_Solar_Struct extends Solar_Test {
         } catch (Solar_Exception_NoSuchProperty $e) {
             // pass
         }
-        
+
         $struct = $this->_newStruct();
         try {
             $invalid = $struct['no_such_key'];
@@ -99,11 +99,11 @@ class Test_Solar_Struct extends Solar_Test {
             // pass
         }
     }
-    
+
     /**
-     * 
+     *
      * Test -- Does a certain key exist in the data?
-     * 
+     *
      */
     public function test__isset()
     {
@@ -113,11 +113,11 @@ class Test_Solar_Struct extends Solar_Test {
         $this->assertFalse(isset($struct->noSuchKey));
         $this->assertFalse(isset($struct['noSuchKey']));
     }
-    
+
     /**
-     * 
+     *
      * Test -- Sets a key value.
-     * 
+     *
      */
     public function test__set()
     {
@@ -125,17 +125,17 @@ class Test_Solar_Struct extends Solar_Test {
         $struct->zim = 'irk';
         $this->assertSame($struct->zim, 'irk');
         $this->assertSame($struct->zim, $struct['zim']);
-        
+
         $struct = $this->_newStruct();
         $struct->a = 'b';
         $this->assertSame($struct->a, 'b');
         $this->assertSame($struct->a, $struct['a']);
     }
-    
+
     /**
-     * 
+     *
      * Test -- Sets a key in the data to null.
-     * 
+     *
      */
     public function test__unset()
     {
@@ -148,7 +148,7 @@ class Test_Solar_Struct extends Solar_Test {
         } catch (Solar_Exception_NoSuchProperty $e) {
             // pass
         }
-        
+
         $struct = $this->_newStruct();
         unset($struct['foo']);
         $this->assertFalse(isset($struct['foo']));
@@ -159,11 +159,11 @@ class Test_Solar_Struct extends Solar_Test {
             // pass
         }
     }
-    
+
     /**
-     * 
+     *
      * Test -- Countable: how many keys are there?
-     * 
+     *
      */
     public function testCount()
     {
@@ -172,11 +172,11 @@ class Test_Solar_Struct extends Solar_Test {
         $expect = 3;
         $this->assertSame($actual, $expect);
     }
-    
+
     /**
-     * 
+     *
      * Test -- Loads the struct with data from an array or another struct.
-     * 
+     *
      */
     public function testLoad()
     {
@@ -190,11 +190,11 @@ class Test_Solar_Struct extends Solar_Test {
         $actual = $struct->toArray();
         $this->assertSame($actual, $expect);
     }
-    
+
     /**
-     * 
+     *
      * Test -- ArrayAccess: does the requested key exist?
-     * 
+     *
      */
     public function testOffsetExists()
     {
@@ -202,20 +202,20 @@ class Test_Solar_Struct extends Solar_Test {
         $this->assertTrue($struct->offsetExists('foo'));
         $this->assertFalse($struct->offsetExists('noSuchKey'));
     }
-    
+
     /**
-     * 
+     *
      * Test -- ArrayAccess: get a key value.
-     * 
+     *
      */
     public function testOffsetGet()
     {
         $struct = $this->_newStruct();
-        
+
         $actual = $struct->offsetGet('foo');
         $expect = 'bar';
         $this->assertSame($actual, $expect);
-        
+
         try {
             $actual = $struct->offsetGet('noSuchKey');
             $this->fail('Should have thrown a NO_SUCH_PROPERTY exception.');
@@ -223,13 +223,13 @@ class Test_Solar_Struct extends Solar_Test {
             // pass
         }
     }
-    
+
     /**
-     * 
+     *
      * Test -- ArrayAccess: set a key value.
-     * 
+     *
      * Identical to __set().
-     * 
+     *
      */
     public function testOffsetSet()
     {
@@ -237,13 +237,13 @@ class Test_Solar_Struct extends Solar_Test {
         $struct->offsetSet('zim', 'irk');
         $this->assertSame($struct->offsetGet('zim'), 'irk');
     }
-    
+
     /**
-     * 
+     *
      * Test -- ArrayAccess: unset a key.
-     * 
+     *
      * Identical to __unset().
-     * 
+     *
      */
     public function testOffsetUnset()
     {
@@ -252,11 +252,11 @@ class Test_Solar_Struct extends Solar_Test {
         $struct->offsetUnset('foo');
         $this->assertFalse($struct->offsetExists('foo'));
     }
-    
+
     /**
-     * 
+     *
      * Test -- Returns a copy of the object data as an array.
-     * 
+     *
      */
     public function testToArray()
     {
@@ -269,7 +269,7 @@ class Test_Solar_Struct extends Solar_Test {
         );
         $this->assertSame($actual, $expect);
     }
-    
+
     public function test_iterator()
     {
         $struct = $this->_newStruct();

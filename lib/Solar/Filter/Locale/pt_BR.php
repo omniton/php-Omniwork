@@ -1,18 +1,18 @@
 <?php
 /**
- * 
+ *
  * Locale file; returns the strings for a specific language.
- * 
+ *
  * @category Solar
- * 
+ *
  * @package Solar_Filter
- * 
+ *
  * @author Rodrigo Moraes <http://tipos.org>
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  * @version $Id: pt_BR.php 2926 2007-11-09 16:25:44Z pmjones $
- * 
+ *
  */
 return array(
     'INVALID_ALNUM'         => 'Use apenas letras (A-Z) ou números (0-9).',

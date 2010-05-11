@@ -1,31 +1,31 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_View_Helper_LinkStylesheet extends Test_Solar_View_Helper {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_View_Helper_LinkStylesheet = array(
     );
-    
+
     // -----------------------------------------------------------------
-    // 
+    //
     // Test methods.
-    // 
+    //
     // -----------------------------------------------------------------
-    
+
     /**
-     * 
+     *
      * Test -- Returns a <link rel="stylesheet" ...
-     * 
+     *
      */
     public function testLinkStylesheet()
     {

@@ -16,23 +16,22 @@
  */
 class Solar_Log_Adapter_Syslog extends Solar_Log_Adapter
 {
-    /**
-     *
-     * Support method to save (write) an event and message to the log.
-     *
-     * @param string $class The class name reporting the event.
-     *
-     * @param string $event The event type (for example 'info' or 'debug').
-     *
-     * @param string $descr A description of the event.
-     *
-     * @return mixed Boolean false if the event was not saved (usually
-     * because it was not recognized), or a non-empty value if it was
-     * saved.
-     *
-     */
+    protected $_Solar_Log_Adapter_Syslog = array(
+        'ident' => 'Solar',
+        'options' => LOG_ODELAY,
+        'facility' => LOG_LOCAL0,
+        'events' => array(
+    LOG_EMERG, LOG_ALERT, LOG_CRIT, LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO, LOG_DEBUG),
+    );
+
+    protected function _postConstruct()
+    {
+        parent::_postConstruct();
+        openlog($this->_config['ident'], $this->_config['options'], $this->_config['facility']);
+    }
+
     protected function _save($class, $event, $descr)
     {
-        return true;
+        return syslog($event, $class . ': ' . $descr);
     }
 }

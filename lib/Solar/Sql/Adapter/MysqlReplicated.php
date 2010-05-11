@@ -177,7 +177,7 @@ class Solar_Sql_Adapter_MysqlReplicated extends Solar_Sql_Adapter_Mysql
         // is this a GET-after-POST/PUT request?
         $request = Solar::dependency(
             'Solar_Request',
-            $this->_config['request']
+        $this->_config['request']
         );
         $this->_is_gap = $request->isGap();
 
@@ -282,9 +282,9 @@ class Solar_Sql_Adapter_MysqlReplicated extends Solar_Sql_Adapter_Mysql
 
         // attempt the connection
         $this->_pdo = new PDO(
-            $this->_dsn,
-            $this->_slaves[$key]['user'],
-            $this->_slaves[$key]['pass']
+        $this->_dsn,
+        $this->_slaves[$key]['user'],
+        $this->_slaves[$key]['pass']
         );
 
         // retain connection info
@@ -327,9 +327,9 @@ class Solar_Sql_Adapter_MysqlReplicated extends Solar_Sql_Adapter_Mysql
 
         // attempt the connection
         $this->_pdo_master = new PDO(
-            $this->_dsn_master,
-            $this->_config['user'],
-            $this->_config['pass']
+        $this->_dsn_master,
+        $this->_config['user'],
+        $this->_config['pass']
         );
 
         // retain connection info
@@ -368,10 +368,10 @@ class Solar_Sql_Adapter_MysqlReplicated extends Solar_Sql_Adapter_Mysql
             'ATTR_ERRMODE',
             'ATTR_ORACLE_NULLS',
             'ATTR_PERSISTENT',
-            // 'ATTR_PREFETCH', // not supported by driver
+        // 'ATTR_PREFETCH', // not supported by driver
             'ATTR_SERVER_INFO',
             'ATTR_SERVER_VERSION',
-            // 'ATTR_TIMEOUT', // not supported by driver
+        // 'ATTR_TIMEOUT', // not supported by driver
         );
 
         foreach ($attribs as $attr) {
@@ -422,8 +422,8 @@ class Solar_Sql_Adapter_MysqlReplicated extends Solar_Sql_Adapter_Mysql
         // use the slave on SELECT statements, but only when we're not in
         // a transaction, and also not in a GET-after-POST request.
         $use_slave = strtoupper(substr($stmt, 0, 6)) == 'SELECT'
-                  && ! $this->_in_transaction
-                  && ! $this->_is_gap;
+        && ! $this->_in_transaction
+        && ! $this->_is_gap;
 
         // prepare the statment
         try {

@@ -1,58 +1,58 @@
 <?php
 /**
- * 
+ *
  * Block class to form definition lists.
- * 
+ *
  * Syntax is ...
- * 
+ *
  *     term
  *     : definition
- *     
+ *
  *     term1
  *     term2
  *     : definition
- *     
+ *
  *     term
  *     : definition 1
  *     : definition 2
- * 
+ *
  * @category Solar
- * 
+ *
  * @package Solar_Markdown_Extra
- * 
+ *
  * @author Michel Fortin <http://www.michelf.com/projects/php-markdown/>
- * 
+ *
  * @author Paul M. Jones <pmjones@solarphp.com>
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  * @version $Id: DefList.php 3153 2008-05-05 23:14:16Z pmjones $
- * 
+ *
  */
 class Solar_Markdown_Extra_DefList extends Solar_Markdown_Plugin
 {
     /**
-     * 
+     *
      * This is a block plugin.
-     * 
+     *
      * @var bool
-     * 
+     *
      */
     protected $_is_block = true;
-    
+
     /**
-     * 
+     *
      * Processes source text to find definition lists.
-     * 
+     *
      * @param string $text The source text.
-     * 
+     *
      * @return string The transformed XHTML.
-     * 
+     *
      */
     public function parse($text)
     {
         $less_than_tab = $this->_getTabWidth() - 1;
-        
+
         // Re-usable pattern to match any entire dl list:
         $whole_list = '
             (                                               # $1 = whole list
@@ -80,57 +80,57 @@ class Solar_Markdown_Extra_DefList extends Solar_Markdown_Plugin
               )
             )
         '; // mx
-        
+
         $text = preg_replace_callback(
             '{
                 (?:(?<=\n\n)|\A\n?)
                 ' . $whole_list . '
             }mx',
-            array($this, '_parse'),
-            $text
+        array($this, '_parse'),
+        $text
         );
-        
+
         return $text;
     }
-    
+
     /**
-     * 
+     *
      * Support callback for block quotes.
-     * 
+     *
      * @param array $matches Matches from preg_replace_callback().
-     * 
+     *
      * @return string The replacement text.
-     * 
+     *
      */
     protected function _parse($matches)
     {
         // Re-usable patterns to match list item bullets and number markers:
         $list = $matches[1];
-    
+
         // Turn double returns into triple returns, so that we can make a
         // paragraph for the last item in a list, if necessary:
         $result = trim($this->_processItems($list));
         $result = "<dl>\n" . $result . "\n</dl>";
         return $this->_toHtmlToken($result) . "\n\n";
     }
-    
+
     /**
-     * 
+     *
      * Process the contents of a definition list, splitting it into
      * individual list items.
-     * 
+     *
      * @param string $list_str The source text of the list block.
-     * 
+     *
      * @return string The replacement text.
-     * 
+     *
      */
     protected function _processItems($list_str)
     {
         $less_than_tab = $this->_getTabWidth() - 1;
-    
+
         // trim trailing blank lines:
         $list_str = preg_replace("/\n{2,}\\z/", "\n", $list_str);
-        
+
         // Process definition terms.
         $list_str = preg_replace_callback(
             '{
@@ -144,10 +144,10 @@ class Solar_Markdown_Extra_DefList extends Solar_Markdown_Plugin
                 (?=\n?[ ]{0,3}:[ ])                             # lookahead for following line feed 
                                                                 # with a definition mark.
             }xm',
-            array($this, '_processDt'),
-            $list_str
+        array($this, '_processDt'),
+        $list_str
         );
-        
+
         // Process actual definitions.
         $list_str = preg_replace_callback(
             '{
@@ -162,21 +162,21 @@ class Solar_Markdown_Extra_DefList extends Solar_Markdown_Plugin
                     )                        
                 )                    
             }xm',
-            array($this, '_processDd'),
-            $list_str
+        array($this, '_processDd'),
+        $list_str
         );
-        
+
         return $list_str;
     }
-    
+
     /**
-     * 
+     *
      * Support callback for processing item terms.
-     * 
+     *
      * @param array $matches Matches from preg_replace_callback().
-     * 
+     *
      * @return string The replacement text.
-     * 
+     *
      */
     protected function _processDt($matches)
     {
@@ -188,21 +188,21 @@ class Solar_Markdown_Extra_DefList extends Solar_Markdown_Plugin
         }
         return $text . "\n";
     }
-    
+
     /**
-     * 
+     *
      * Support callback for processing item definitions.
-     * 
+     *
      * @param array $matches Matches from preg_replace_callback().
-     * 
+     *
      * @return string The replacement text.
-     * 
+     *
      */
     protected function _processDd($matches)
     {
         $leading_line = $matches[1];
         $def          = $matches[2];
-        
+
         if ($leading_line || preg_match('/\n{2,}/', $def)) {
             $def = $this->_processBlocks($this->_outdent($def . "\n\n"));
             $def = "\n". $def ."\n";
@@ -210,7 +210,7 @@ class Solar_Markdown_Extra_DefList extends Solar_Markdown_Plugin
             $def = rtrim($def);
             $def = $this->_processSpans($this->_outdent($def));
         }
-        
+
         return "\n<dd>" . $def . "</dd>\n";
     }
 }

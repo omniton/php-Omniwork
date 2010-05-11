@@ -1,35 +1,35 @@
 <?php
 /**
- * 
+ *
  * Applies inflections to words: singular, plural, camel, underscore, etc.
- * 
+ *
  * @category Solar
- * 
+ *
  * @package Solar_Inflect Word-inflection tools.
- * 
+ *
  * @author Paul M. Jones <pmjones@solarphp.com>
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  * @version $Id: Inflect.php 4380 2010-02-14 16:06:52Z pmjones $
- * 
+ *
  */
 class Solar_Inflect extends Solar_Base
 {
     /**
-     * 
+     *
      * Default configuration values.
-     * 
+     *
      * @config array identical Words that do not change from singular to plural.
-     * 
+     *
      * @config array irregular Irregular singular-to-plural inflections.
-     * 
+     *
      * @config array to_singular Rules for preg_replace() to convert plurals to singulars.
-     * 
+     *
      * @config array to_plural Rules for preg_replace() to convert singulars to plurals.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Solar_Inflect = array(
         'identical'   => array(),
@@ -37,15 +37,15 @@ class Solar_Inflect extends Solar_Base
         'to_singular' => array(),
         'to_plural'   => array(),
     );
-    
+
     /**
-     * 
+     *
      * A list of words that are the same in singular and plural.
-     * 
+     *
      * This list is adapted from Ruby on Rails ActiveSupport inflections.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_identical = array(
         'equipment',
@@ -57,18 +57,18 @@ class Solar_Inflect extends Solar_Base
         'sheep',
         'species',
     );
-    
+
     /**
-     * 
+     *
      * Irregular singular-to-plural conversions.
-     * 
+     *
      * Array format is "singular" => "plural" and are literal text, not
      * regular expressions.
-     * 
+     *
      * This list is adapted from Ruby on Rails ActiveSupport inflections.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_irregular = array(
         'child'  => 'children',
@@ -77,19 +77,19 @@ class Solar_Inflect extends Solar_Base
         'person' => 'people',
         'sex'    => 'sexes',
     );
-    
+
     /**
-     * 
+     *
      * Regex rules for converting plural to singular.
-     * 
+     *
      * Array format is "pattern" => "replacement" for [[php::preg_replace() | ]].
-     * 
+     *
      * All patterns are treated as '/pattern$/i'.
-     * 
+     *
      * This list is adapted from Ruby on Rails ActiveSupport inflections.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_to_singular = array(
         's'                    => '',
@@ -117,19 +117,19 @@ class Solar_Inflect extends Solar_Base
         '(matr)ices'           => '$1ix',
         '(quiz)zes'            => '$1',
     );
-    
+
     /**
-     * 
+     *
      * Regex rules for converting singular to plural.
-     * 
+     *
      * Array format is "pattern" => "replacement" for [[php::preg_replace() | ]].
-     * 
+     *
      * All patterns are treated as '/pattern$/i'.
-     * 
+     *
      * This list is taken from Ruby on Rails ActiveSupport inflections.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_to_plural = array(
         ''                     => 's',
@@ -150,53 +150,53 @@ class Solar_Inflect extends Solar_Base
         '^(ox)'                => '$1en',
         '(quiz)'               => '$1zes',
     );
-    
+
     /**
-     * 
+     *
      * Post-construction tasks to complete object construction.
-     * 
+     *
      * @return void
-     * 
+     *
      */
     protected function _postConstruct()
     {
         parent::_postConstruct();
-        
+
         // append to the default arrays from configs
         $list = array('identical', 'irregular', 'to_singular', 'to_plural');
         foreach ($list as $key) {
             if ($this->_config[$key]) {
                 $var = "_$key";
                 $this->$var = array_merge(
-                    $this->$var,
-                    (array) $this->_config[$key]
+                $this->$var,
+                (array) $this->_config[$key]
                 );
             }
         }
-        
+
         // reverse rules so they are processed in LIFO order
         $this->_to_plural   = array_reverse($this->_to_plural);
         $this->_to_singular = array_reverse($this->_to_singular);
     }
-    
+
     /**
-     * 
+     *
      * Returns a singular word as a plural.
      *
      * @param string $str A singular word.
-     * 
+     *
      * @return string The plural form of the word.
-     * 
+     *
      */
     public function toPlural($str)
     {
         $key = strtolower($str);
-        
+
         // look for words that are the same either way
         if (in_array($key, $this->_identical)) {
             return $str;
         }
-        
+
         // look for irregular words
         foreach ($this->_irregular as $key => $val) {
             $find = "/(.*)$key\$/i";
@@ -205,7 +205,7 @@ class Solar_Inflect extends Solar_Base
                 return preg_replace($find, $repl, $str);
             }
         }
-        
+
         // apply normal rules
         foreach($this->_to_plural as $find => $repl) {
             $find = '/' . $find . '$/i';
@@ -213,29 +213,29 @@ class Solar_Inflect extends Solar_Base
                 return preg_replace($find, $repl, $str);
             }
         }
-        
+
         // couldn't find a plural form
         return $str;
     }
-    
+
     /**
-     * 
+     *
      * Returns a plural word as a singular.
      *
      * @param string $str A plural word.
-     * 
+     *
      * @return string The singular form of the word.
-     * 
+     *
      */
     public function toSingular($str)
     {
         $key = strtolower($str);
-        
+
         // look for words that are the same either way
         if (in_array($key, $this->_identical)) {
             return $str;
         }
-        
+
         // look for irregular words
         // note that we flip singulars and plurals
         $list = array_flip($this->_irregular);
@@ -246,7 +246,7 @@ class Solar_Inflect extends Solar_Base
                 return preg_replace($find, $repl, $str);
             }
         }
-        
+
         // apply normal rules
         foreach($this->_to_singular as $find => $repl) {
             $find = '/' . $find . '$/i';
@@ -254,20 +254,20 @@ class Solar_Inflect extends Solar_Base
                 return preg_replace($find, $repl, $str);
             }
         }
-        
+
         // couldn't find a singular form
         return $str;
     }
-    
+
     /**
-     * 
-     * Returns any string, converted to using dashes with only lowercase 
+     *
+     * Returns any string, converted to using dashes with only lowercase
      * alphanumerics.
-     * 
+     *
      * @param string $str The string to convert.
-     * 
+     *
      * @return string The converted string.
-     * 
+     *
      */
     public function toDashes($str)
     {
@@ -276,15 +276,15 @@ class Solar_Inflect extends Solar_Base
         $str = preg_replace('/[ _-]+/', '-', $str);
         return $str;
     }
-    
+
     /**
-     * 
+     *
      * Returns "foo_bar_baz" as "fooBarBaz".
-     * 
+     *
      * @param string $str The underscore word.
-     * 
+     *
      * @return string The word in camel-caps.
-     * 
+     *
      */
     public function underToCamel($str)
     {
@@ -293,15 +293,15 @@ class Solar_Inflect extends Solar_Base
         $str[0] = strtolower($str[0]);
         return $str;
     }
-    
+
     /**
-     * 
+     *
      * Returns "foo-bar-baz" as "fooBarBaz".
-     * 
+     *
      * @param string $str The dashed word.
-     * 
+     *
      * @return string The word in camel-caps.
-     * 
+     *
      */
     public function dashesToCamel($str)
     {
@@ -310,15 +310,15 @@ class Solar_Inflect extends Solar_Base
         $str[0] = strtolower($str[0]);
         return $str;
     }
-    
+
     /**
-     * 
+     *
      * Returns "foo_bar_baz" as "FooBarBaz".
-     * 
+     *
      * @param string $str The underscore word.
-     * 
+     *
      * @return string The word in studly-caps.
-     * 
+     *
      */
     public function underToStudly($str)
     {
@@ -326,15 +326,15 @@ class Solar_Inflect extends Solar_Base
         $str[0] = strtoupper($str[0]);
         return $str;
     }
-    
+
     /**
-     * 
+     *
      * Returns "foo-bar-baz" as "FooBarBaz".
-     * 
+     *
      * @param string $str The dashed word.
-     * 
+     *
      * @return string The word in studly-caps.
-     * 
+     *
      */
     public function dashesToStudly($str)
     {
@@ -342,15 +342,15 @@ class Solar_Inflect extends Solar_Base
         $str[0] = strtoupper($str[0]);
         return $str;
     }
-    
+
     /**
-     * 
+     *
      * Returns "camelCapsWord" and "CamelCapsWord" as "Camel_Caps_Word".
-     * 
+     *
      * @param string $str The camel-caps word.
-     * 
+     *
      * @return string The word with underscores in place of camel caps.
-     * 
+     *
      */
     public function camelToUnder($str)
     {
@@ -358,15 +358,15 @@ class Solar_Inflect extends Solar_Base
         $str = str_replace(' ', '_', ucwords($str));
         return $str;
     }
-    
+
     /**
-     * 
+     *
      * Returns "camelCapsWord" and "CamelCapsWord" as "camel-caps-word".
-     * 
+     *
      * @param string $str The camel-caps word.
-     * 
+     *
      * @return string The word with dashes in place of camel caps.
-     * 
+     *
      */
     public function camelToDashes($str)
     {
@@ -374,15 +374,15 @@ class Solar_Inflect extends Solar_Base
         $str = str_replace(' ', '-', ucwords($str));
         return strtolower($str);
     }
-    
+
     /**
-     * 
+     *
      * Returns "Class_Name" as "Class/Name.php".
-     * 
+     *
      * @param string $str The class name.
-     * 
+     *
      * @return string The class as a file name.
-     * 
+     *
      */
     public function classToFile($str)
     {

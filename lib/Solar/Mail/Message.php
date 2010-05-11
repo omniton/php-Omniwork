@@ -225,7 +225,7 @@ class Solar_Mail_Message extends Solar_Base
         if ($this->_config['transport']) {
             $this->_transport = Solar::dependency(
                 'Solar_Mail_Transport',
-                $this->_config['transport']
+            $this->_config['transport']
             );
         }
     }
@@ -371,8 +371,8 @@ class Solar_Mail_Message extends Solar_Base
         $addr = $addr ? $addr : $this->_config['fromAddr'];
         $name = empty($name) ? $this->_config['fromName'] : $name;
         $this->_from = array(
-            $addr,
-            $name,
+        $addr,
+        $name,
         );
 
         return $this;
@@ -406,8 +406,8 @@ class Solar_Mail_Message extends Solar_Base
     public function setReplyTo($addr, $name = '')
     {
         $this->_reply_to = array(
-            $addr,
-            $name,
+        $addr,
+        $name,
         );
 
         return $this;
@@ -496,9 +496,9 @@ class Solar_Mail_Message extends Solar_Base
         } elseif (! $type) {
             // no type, return all addresses
             return array_keys(array_merge(
-                $this->_rcpt['To'],
-                $this->_rcpt['Cc'],
-                $this->_rcpt['Bcc']
+            $this->_rcpt['To'],
+            $this->_rcpt['Cc'],
+            $this->_rcpt['Bcc']
             ));
         } else {
             // not a recognized type, so no addresses
@@ -777,23 +777,23 @@ class Solar_Mail_Message extends Solar_Base
 
             // both text and html, but no attachments: multipart/alternative
             $value = 'multipart/alternative; '
-                   . 'charset="' . $this->_charset . '"; '
-                   . $this->_crlf . " "
-                   . 'boundary="' . $this->_boundary . '"';
+            . 'charset="' . $this->_charset . '"; '
+            . $this->_crlf . " "
+            . 'boundary="' . $this->_boundary . '"';
 
         } elseif ($this->_atch) {
 
             // has attachments, use multipart/mixed
             $value = 'multipart/mixed; '
-                   . 'charset="' . $this->_charset . '"; '
-                   . $this->_crlf . " "
-                   . 'boundary="' . $this->_boundary . '"';
+            . 'charset="' . $this->_charset . '"; '
+            . $this->_crlf . " "
+            . 'boundary="' . $this->_boundary . '"';
 
         } elseif ($this->_html) {
 
             // no attachments, html only
             $value = 'text/html; '
-                   . 'charset="' . $this->_charset . '"';
+            . 'charset="' . $this->_charset . '"';
 
             // use the part's encoding
             $encoding = $this->_html->getEncoding();
@@ -802,7 +802,7 @@ class Solar_Mail_Message extends Solar_Base
 
             // no attachments, text only
             $value = 'text/plain; '
-                   . 'charset="' . $this->_charset . '"';
+            . 'charset="' . $this->_charset . '"';
 
             // use the part's encoding
             $encoding = $this->_text->getEncoding();
@@ -810,7 +810,7 @@ class Solar_Mail_Message extends Solar_Base
         } else {
             // final fallback
             $value = 'text/plain; '
-                   . 'charset="' . $this->_charset . '"';
+            . 'charset="' . $this->_charset . '"';
         }
 
         // Content-Type:
@@ -826,10 +826,10 @@ class Solar_Mail_Message extends Solar_Base
             // val[0] is the label, val[1] is the value
             $val[0] = Solar_Mime::headerLabel($val[0]);
             $headers[$key][1] = Solar_Mime::headerValue(
-                $val[0],
-                $val[1],
-                $this->_charset,
-                $this->_crlf
+            $val[0],
+            $val[1],
+            $this->_charset,
+            $this->_crlf
             );
         }
 
@@ -838,13 +838,13 @@ class Solar_Mail_Message extends Solar_Base
             $label = Solar_Mime::headerLabel($label);
             foreach ($list as $value) {
                 $headers[] = array(
-                    $label,
-                    Solar_Mime::headerValue(
-                        $label,
-                        $value,
-                        $this->_charset,
-                        $this->_crlf
-                    ),
+                $label,
+                Solar_Mime::headerValue(
+                $label,
+                $value,
+                $this->_charset,
+                $this->_crlf
+                ),
                 );
             }
         }
@@ -899,10 +899,10 @@ class Solar_Mail_Message extends Solar_Base
             $alt->setCharset($this->_charset);
             $alt->setBoundary($boundary);
             $alt->setContent(ltrim($this->_boundarySep($boundary))
-                           . $this->_text->fetch()
-                           . $this->_boundarySep($boundary)
-                           . $this->_html->fetch()
-                           . $this->_boundaryEnd($boundary));
+            . $this->_text->fetch()
+            . $this->_boundarySep($boundary)
+            . $this->_html->fetch()
+            . $this->_boundaryEnd($boundary));
 
             // add the combined text/html alternative part
             $parts[] = $alt;
@@ -939,14 +939,14 @@ class Solar_Mail_Message extends Solar_Base
             // multiple parts.
             // add a warning message ...
             $content = 'This is a message in MIME format. If you see this, '
-                     . $this->_crlf
-                     . 'your mail reader does not support the MIME format.'
-                     . $this->_crlf;
+            . $this->_crlf
+            . 'your mail reader does not support the MIME format.'
+            . $this->_crlf;
 
             // then each of the parts with a boundary separator
             foreach ($parts as $part) {
                 $content .= $this->_boundarySep()
-                          . $part->fetch();
+                . $part->fetch();
             }
 
             // add a boundary ending, and we're done

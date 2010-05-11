@@ -2,7 +2,7 @@
 class Fixture_Solar_Sql_Model extends Solar_Base
 {
     protected $_model;
-    
+
     public function setup()
     {
         $this->_model = Solar::dependency('Solar_Sql_Model_Catalog', 'model_catalog');
@@ -18,7 +18,7 @@ class Fixture_Solar_Sql_Model extends Solar_Base
         $this->_setupComments();
         $sql->commit();
     }
-    
+
     // add 20-30 users
     protected function _setupUsers()
     {
@@ -35,7 +35,7 @@ class Fixture_Solar_Sql_Model extends Solar_Base
             unset($user);
         }
     }
-    
+
     // add prefs for each user
     protected function _setupPrefs()
     {
@@ -48,13 +48,13 @@ class Fixture_Solar_Sql_Model extends Solar_Base
                 'uri'     => "http://user_$id.example.com",
                 'moniker' => "Moniker $id",
             ));
-            
+
             $pref->save();
             $pref = null;
             unset($pref);
         }
     }
-    
+
     // add 3-5 areas, with a random user from 1-5 as owner
     protected function _setupAreas()
     {
@@ -71,7 +71,7 @@ class Fixture_Solar_Sql_Model extends Solar_Base
             unset($area);
         }
     }
-    
+
     // for each area, create 8-12 nodes,
     // each for a random user from 1-20
     protected function _setupNodes()
@@ -94,7 +94,7 @@ class Fixture_Solar_Sql_Model extends Solar_Base
             }
         }
     }
-    
+
     // one meta for each node
     protected function _setupMetas()
     {
@@ -109,7 +109,7 @@ class Fixture_Solar_Sql_Model extends Solar_Base
             unset($meta);
         }
     }
-    
+
     // 8-12 tags
     protected function _setupTags()
     {
@@ -125,7 +125,7 @@ class Fixture_Solar_Sql_Model extends Solar_Base
             unset($tag);
         }
     }
-    
+
     // 3-5 tags per node
     protected function _setupTaggings()
     {
@@ -133,50 +133,50 @@ class Fixture_Solar_Sql_Model extends Solar_Base
         $tag_last  = count($tag_coll) - 1;
         $node_coll = $this->_model->nodes->fetchAll();
         $taggings  = $this->_model->taggings;
-        
+
         // add some tags on each node through taggings
         foreach ($node_coll as $node) {
-            
+
             // add 3-5 tags on this node
             $k = rand(3,5);
-            
+
             // which tags have we used already?
             $tags_used = array();
-            
+
             // add each of the tags
             for ($i = 0; $i < $k; $i ++) {
-                
+
                 // pick a random tag that has not been used yet
                 do {
                     $tagno = rand(0, $tag_last);
                 } while (in_array($tagno, $tags_used));
-                
+
                 // mark it as used
                 $tags_used[] = $tagno;
-                
+
                 // get the tag from the collection
                 $tag = $tag_coll[$tagno];
-                
+
                 // match the node to the tag with a tagging
                 $tagging = $taggings->fetchNew(array(
                     'node_id' => $node->id,
                     'tag_id'  => $tag->id,
                 ));
-                
+
                 $tagging->save();
-                
+
                 $tag = null;
                 unset($tag);
-                
+
                 $tagging = null;
                 unset($tagging);
             }
         }
-        
+
         $node_coll->free();
         $tag_coll->free();
     }
-    
+
     // add 0-3 comments on each node
     protected function _setupComments()
     {

@@ -418,7 +418,7 @@ class Solar_Http_Response extends Solar_Base
      *
      */
     public function setCookie($name, $value = '', $expires = 0,
-        $path = '', $domain = '', $secure = false, $httponly = null)
+    $path = '', $domain = '', $secure = false, $httponly = null)
     {
         // store the cookie value
         $this->_cookies[$name] = array(
@@ -644,8 +644,8 @@ class Solar_Http_Response extends Solar_Base
             // was httponly set for this cookie?  if not,
             // use the default.
             $httponly = ($val['httponly'] === null)
-                ? $this->_cookies_httponly
-                : (bool) $val['httponly'];
+            ? $this->_cookies_httponly
+            : (bool) $val['httponly'];
 
             // try to allow for times not in unix-timestamp format
             if (! is_numeric($val['expires'])) {
@@ -654,13 +654,13 @@ class Solar_Http_Response extends Solar_Base
 
             // actually set the cookie
             setcookie(
-                $key,
-                $val['value'],
-                (int) $val['expires'],
-                $val['path'],
-                $val['domain'],
-                (bool) $val['secure'],
-                (bool) $httponly
+            $key,
+            $val['value'],
+            (int) $val['expires'],
+            $val['path'],
+            $val['domain'],
+            (bool) $val['secure'],
+            (bool) $httponly
             );
         }
     }

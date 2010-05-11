@@ -4,7 +4,7 @@ $config = array();
 /**
  * General ini settings.
  */
- 
+
 $config['Solar']['system'] = dirname(dirname(dirname(dirname(__FILE__))));
 
 $config['Solar']['ini_set'] = array(

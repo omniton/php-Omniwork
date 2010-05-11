@@ -385,7 +385,7 @@ class Solar_Uri extends Solar_Base
     {
         // build a default scheme (with '://' in it)
         $is_ssl = $this->_request->server('HTTPS') == 'on'
-               || $this->_request->server('SERVER_PORT') == 443;
+        || $this->_request->server('SERVER_PORT') == 443;
 
         $scheme = (($is_ssl) ? 'https' : 'http') . '://';
 
@@ -418,8 +418,8 @@ class Solar_Uri extends Solar_Base
                 // guess that mod_rewrite is off; build up from
                 // component parts.
                 $uri .= $this->_request->server('SCRIPT_NAME')
-                      . $this->_request->server('PATH_INFO')
-                      . '?' . $this->_request->server('QUERY_STRING');
+                . $this->_request->server('PATH_INFO')
+                . '?' . $this->_request->server('QUERY_STRING');
             } else {
                 // guess that mod_rewrite is on
                 $uri .= $this->_request->server('REQUEST_URI');
@@ -460,8 +460,8 @@ class Solar_Uri extends Solar_Base
         $path = $this->_config['path'];
         $len  = strlen($path);
         $flag = $elem['path'] == $path ||
-                $elem['path'] == rtrim($path, '/') ||
-                substr($elem['path'], 0, $len) == $path;
+        $elem['path'] == rtrim($path, '/') ||
+        substr($elem['path'], 0, $len) == $path;
 
         if ($flag) {
             $elem['path'] = substr($elem['path'], $len);
@@ -514,7 +514,7 @@ class Solar_Uri extends Solar_Base
 
         // add the host and port, if any.
         $uri .= (empty($this->host) ? '' : urlencode($this->host))
-            . (empty($this->port) ? '' : ':' . (int) $this->port);
+        . (empty($this->port) ? '' : ':' . (int) $this->port);
         return $uri;
     }
 
@@ -540,8 +540,8 @@ class Solar_Uri extends Solar_Base
         // add the rest of the URI. we use trim() instead of empty() on string
         // elements to allow for string-zero values.
         return $uri . $this->getPath()
-             . (empty($query)                ? '' : '?' . $query)
-             . (trim($this->fragment) === '' ? '' : '#' . urlencode($this->fragment));
+        . (empty($query)                ? '' : '?' . $query)
+        . (trim($this->fragment) === '' ? '' : '#' . urlencode($this->fragment));
     }
 
     /**
@@ -648,8 +648,8 @@ class Solar_Uri extends Solar_Base
         // we use trim() instead of empty() on string elements
         // to allow for string-zero values.
         return $this->_config['path']
-             . (empty($this->path)         ? '' : $this->_pathEncode($this->path))
-             . (trim($this->format) === '' ? '' : '.' . urlencode($this->format));
+        . (empty($this->path)         ? '' : $this->_pathEncode($this->path))
+        . (trim($this->format) === '' ? '' : '.' . urlencode($this->format));
     }
 
     /**

@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateEmail extends Test_Solar_Filter_Abstract {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateEmail = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates that the value is an email address.
-     * 
+     *
      */
     public function testValidateEmail()
     {
@@ -35,7 +35,7 @@ class Test_Solar_Filter_ValidateEmail extends Test_Solar_Filter_Abstract {
             $this->assertTrue($this->_filter->validateEmail($val));
         }
     }
-    
+
     public function testValidateEmail_badOrBlank()
     {
         $test = array(
@@ -50,7 +50,7 @@ class Test_Solar_Filter_ValidateEmail extends Test_Solar_Filter_Abstract {
             $this->assertFalse($this->_filter->validateEmail($val));
         }
     }
-    
+
     public function testValidateEmail_notRequired()
     {
         $this->_filter->setRequire(false);

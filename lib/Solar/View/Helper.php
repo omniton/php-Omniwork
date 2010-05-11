@@ -38,10 +38,10 @@ abstract class Solar_View_Helper extends Solar_Base {
         if (empty($this->_config['_view'])) {
             // we need the parent view object
             throw Solar::exception(
-                get_class($this),
+            get_class($this),
                 'ERR_VIEW_NOT_SET',
                 "Config key '_view' not set, or not Solar_View object"
-            );
+                );
         }
         $this->_view = $this->_config['_view'];
         unset($this->_config['_view']);

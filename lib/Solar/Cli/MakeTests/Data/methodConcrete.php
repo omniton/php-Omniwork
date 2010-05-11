@@ -1,10 +1,2 @@
-    
-    /**
-     * 
-     * Test -- {:summ}
-     * 
-     */
-    public function {:name}()
-    {
-        $this->todo('stub');
-    }
+ /** * * Test -- {:summ} * */ public function {:name}() {
+$this->todo('stub'); }

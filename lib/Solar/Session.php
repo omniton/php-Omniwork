@@ -249,7 +249,7 @@ class Solar_Session extends Solar_Base
         if (! self::$_handler) {
             self::$_handler = Solar::dependency(
                 'Solar_Session_Handler',
-                $this->_config['handler']
+            $this->_config['handler']
             );
         }
 
@@ -312,11 +312,11 @@ class Solar_Session extends Solar_Base
     {
         // set initial params
         session_set_cookie_params($this->_config['lifetime'], $this->_config['path'],
-            $this->_config['domain'], $this->_config['secure'], $this->_config['httponly']);
+        $this->_config['domain'], $this->_config['secure'], $this->_config['httponly']);
         session_name($this->_config['name']);
 
         // don't start more than once.
-            if ($this->isStarted()) {
+        if ($this->isStarted()) {
             // be sure the segment is loaded, though
             $this->load();
             return;

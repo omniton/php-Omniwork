@@ -1,31 +1,31 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateRangeLength extends Test_Solar_Filter_Abstract {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateRangeLength = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates that the length of the value is within a given range.
-     * 
+     *
      */
     public function testValidateRangeLength()
     {
         $min = 4;
         $max = 6;
-        
+
         // good
         $test = array(
             "abcd",
@@ -36,7 +36,7 @@ class Test_Solar_Filter_ValidateRangeLength extends Test_Solar_Filter_Abstract {
             $this->assertTrue($this->_filter->validateRangeLength($val, $min, $max));
         }
     }
-    
+
     public function testValidateRangeLength_badOrBlank()
     {
         $min = 4;
@@ -50,7 +50,7 @@ class Test_Solar_Filter_ValidateRangeLength extends Test_Solar_Filter_Abstract {
             $this->assertFalse($this->_filter->validateRangeLength($val, $min, $max));
         }
     }
-    
+
     public function testValidateRangeLength_notRequired()
     {
         $min = 4;

@@ -69,7 +69,7 @@ class Solar_Session_Handler_Adapter_Sql extends Solar_Session_Handler_Adapter
         if (! $this->_sql) {
             $this->_sql = Solar::dependency(
                 'Solar_Sql',
-                $this->_config['sql']
+            $this->_config['sql']
             );
         }
 
@@ -103,12 +103,12 @@ class Solar_Session_Handler_Adapter_Sql extends Solar_Session_Handler_Adapter
     {
         $sel = Solar::factory(
             'Solar_Sql_Select',
-            array('sql' => $this->_sql)
+        array('sql' => $this->_sql)
         );
 
         $sel->from($this->_config['table'])
-            ->cols($this->_config['data_col'])
-            ->where("{$this->_config['id_col']} = ?", $id);
+        ->cols($this->_config['data_col'])
+        ->where("{$this->_config['id_col']} = ?", $id);
 
         return $sel->fetchValue();
     }
@@ -128,14 +128,14 @@ class Solar_Session_Handler_Adapter_Sql extends Solar_Session_Handler_Adapter
     {
         $sel = Solar::factory(
             'Solar_Sql_Select',
-            array('sql' => $this->_sql)
+        array('sql' => $this->_sql)
         );
 
         // select up to 2 records from the database
         $sel->from($this->_config['table'])
-            ->cols($this->_config['id_col'])
-            ->where("{$this->_config['id_col']} = ?", $id)
-            ->limit(2);
+        ->cols($this->_config['id_col'])
+        ->where("{$this->_config['id_col']} = ?", $id)
+        ->limit(2);
 
         // use fetchCol() instead of countPages() for speed reasons.
         // count on some DBs is pretty slow, so this will fetch only
@@ -169,8 +169,8 @@ class Solar_Session_Handler_Adapter_Sql extends Solar_Session_Handler_Adapter
     public function destroy($id)
     {
         $this->_sql->delete(
-            $this->_config['table'],
-            array("{$this->_config['id_col']} = ?" => $id)
+        $this->_config['table'],
+        array("{$this->_config['id_col']} = ?" => $id)
         );
 
         return true;
@@ -192,7 +192,7 @@ class Solar_Session_Handler_Adapter_Sql extends Solar_Session_Handler_Adapter
         // timestamp is current time minus session.gc_maxlifetime
         $timestamp = date(
             'Y-m-d H:i:s',
-            mktime(date('H'), date('i'), date('s') - $lifetime)
+        mktime(date('H'), date('i'), date('s') - $lifetime)
         );
 
         // delete all sessions last updated before the timestamp
@@ -219,10 +219,10 @@ class Solar_Session_Handler_Adapter_Sql extends Solar_Session_Handler_Adapter
         $now = date('Y-m-d H:i:s');
 
         $cols = array(
-            $this->_config['created_col'] => $now,
-            $this->_config['updated_col'] => $now,
-            $this->_config['id_col']      => $id,
-            $this->_config['data_col']    => $data,
+        $this->_config['created_col'] => $now,
+        $this->_config['updated_col'] => $now,
+        $this->_config['id_col']      => $id,
+        $this->_config['data_col']    => $data,
         );
 
         try {
@@ -250,8 +250,8 @@ class Solar_Session_Handler_Adapter_Sql extends Solar_Session_Handler_Adapter
     protected function _update($id, $data)
     {
         $cols = array(
-            $this->_config['updated_col'] => date('Y-m-d H:i:s'),
-            $this->_config['data_col']    => $data,
+        $this->_config['updated_col'] => date('Y-m-d H:i:s'),
+        $this->_config['data_col']    => $data,
         );
 
         $where = array("{$this->_config['id_col']} = ?" => $id);

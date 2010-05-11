@@ -1,3 +1,1 @@
-return array(
-    'TEXT_WELCOME' => 'This is your new command.',
-);
+return array( 'TEXT_WELCOME' => 'This is your new command.', );

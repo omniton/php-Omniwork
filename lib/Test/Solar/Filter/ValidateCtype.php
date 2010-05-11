@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateCtype extends Test_Solar_Filter_Abstract {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateCtype = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates the value against a [[php::ctype | ]] function.
-     * 
+     *
      */
     public function testValidateCtype()
     {
@@ -32,12 +32,12 @@ class Test_Solar_Filter_ValidateCtype extends Test_Solar_Filter_Abstract {
             $this->assertTrue($this->_filter->validateCtype($val, 'alpha'));
         }
     }
-    
+
     public function testValidateCtype_badOrBlank()
     {
         $test = array(
             ' ', '',
-            0, 1, 2, 5,
+        0, 1, 2, 5,
             '0', '1', '2', '5',
             "Seven 8 nine",
             "non:alpha-numeric's",
@@ -47,7 +47,7 @@ class Test_Solar_Filter_ValidateCtype extends Test_Solar_Filter_Abstract {
             $this->assertFalse($this->_filter->validateCtype($val, 'alpha'));
         }
     }
-    
+
     public function testValidateCtype_notRequired()
     {
         $this->_filter->setRequire(false);

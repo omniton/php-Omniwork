@@ -1,19 +1,19 @@
 <?php
 /**
- * 
+ *
  * Locale file.  Returns the strings for a specific language.
- * 
+ *
  * @category Solar
- * 
+ *
  * @package Solar_Controller
- * 
+ *
  * @author Tobias Nix <tobias.nix@paupau.org>
  * @author Bahtiar `kalkin` Gadimov <bahtiar@gadimov.de>
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  * @version $Id: de_DE.php 4326 2010-02-02 02:33:00Z pmjones $
- * 
+ *
  */
 return array(
     'ERR_ACTION_NOT_FOUND'      => 'Konnte die Klassenmethode zur Ausführung der angefragten Aktion nicht finden.',
@@ -29,5 +29,5 @@ return array(
     'TEXT_THANKS_PATIENCE'      => 'Danke für Ihre Geduld. Wir kümmern uns um den Fehler.',
     'HEADING_NOT_FOUND'         => 'Nicht gefunden',
     'TEXT_NOT_FOUND'            => 'Es tut uns Leid, aber wir fanden nichts was Ihrer Anfrage entspricht. Weiter unten sehen sie, wie wir Ihre Anfrage interpretiert haben',
-    
+
 );

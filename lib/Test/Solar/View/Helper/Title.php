@@ -1,31 +1,31 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_View_Helper_Title extends Test_Solar_View_Helper {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_View_Helper_Title = array(
     );
-    
+
     // -----------------------------------------------------------------
-    // 
+    //
     // Test methods.
-    // 
+    //
     // -----------------------------------------------------------------
-    
+
     /**
-     * 
+     *
      * Test -- Returns a <title ...
-     * 
+     *
      */
     public function testTitle()
     {

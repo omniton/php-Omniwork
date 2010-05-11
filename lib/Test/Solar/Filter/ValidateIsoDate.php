@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateIsoDate extends Test_Solar_Filter_ValidateIsoTimestamp {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateIsoDate = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates that the value is an ISO 8601 date string.
-     * 
+     *
      */
     public function testValidateIsoDate()
     {
@@ -34,7 +34,7 @@ class Test_Solar_Filter_ValidateIsoDate extends Test_Solar_Filter_ValidateIsoTim
             $this->assertTrue($this->_filter->validateIsoDate($val));
         }
     }
-    
+
     public function testValidateIsoDate_badOrBlank()
     {
         $test = array(
@@ -53,7 +53,7 @@ class Test_Solar_Filter_ValidateIsoDate extends Test_Solar_Filter_ValidateIsoTim
             $this->assertFalse($this->_filter->validateIsoDate($val));
         }
     }
-    
+
     public function testValidateIsoDate_notRequired()
     {
         $this->_filter->setRequire(false);

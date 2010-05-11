@@ -1,43 +1,43 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Markdown_Plugin_Break extends Test_Solar_Markdown_Plugin {
-    
+
     /**
-     * 
+     *
      * Default configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Markdown_Plugin_Break = array(
     );
-    
+
     /**
-     * 
+     *
      * Is the plugin expected to be a block processor?
-     * 
+     *
      * @var bool
-     * 
+     *
      */
     protected $_is_block = false;
-    
+
     /**
-     * 
+     *
      * Is the plugin expected to be a span processor?
-     * 
+     *
      * @var bool
-     * 
+     *
      */
     protected $_is_span = true;
-    
+
     /**
-     * 
+     *
      * Test -- Constructor.
-     * 
+     *
      */
     public function test__construct()
     {
@@ -45,11 +45,11 @@ class Test_Solar_Markdown_Plugin_Break extends Test_Solar_Markdown_Plugin {
         $expect = 'Solar_Markdown_Plugin_Break';
         $this->assertInstance($actual, $expect);
     }
-    
+
     /**
-     * 
+     *
      * Test -- Cleans up the source text after all parsing occurs.
-     * 
+     *
      */
     public function testCleanup()
     {
@@ -58,21 +58,21 @@ class Test_Solar_Markdown_Plugin_Break extends Test_Solar_Markdown_Plugin {
         $actual = $this->_plugin->cleanup($source);
         $this->assertSame($actual, $expect);
     }
-    
+
     /**
-     * 
+     *
      * Test -- Get the list of characters this plugin uses for parsing.
-     * 
+     *
      */
     public function testGetChars()
     {
         $this->todo('stub');
     }
-    
+
     /**
-     * 
+     *
      * Test -- Adds <br /> tags to each line ending with two or more spaces.
-     * 
+     *
      */
     public function testParse()
     {
@@ -81,11 +81,11 @@ class Test_Solar_Markdown_Plugin_Break extends Test_Solar_Markdown_Plugin {
         $actual = $this->_plugin->parse($source);
         $this->assertRegex($actual, "@$expect@");
     }
-    
+
     /**
-     * 
+     *
      * Test -- Prepares the source text before any parsing occurs.
-     * 
+     *
      */
     public function testPrepare()
     {
@@ -94,27 +94,27 @@ class Test_Solar_Markdown_Plugin_Break extends Test_Solar_Markdown_Plugin {
         $actual = $this->_plugin->prepare($source);
         $this->assertSame($actual, $expect);
     }
-    
+
     /**
-     * 
+     *
      * Test -- Resets this plugin to its original state (for multiple parsings).
-     * 
+     *
      */
     public function testReset()
     {
         $this->todo('stub');
     }
-    
+
     /**
-     * 
+     *
      * Test -- Sets the "parent" Markdown object.
-     * 
+     *
      */
     public function testSetMarkdown()
     {
         $this->todo('stub');
     }
-    
+
     public function testRender()
     {
         $source = "line\nline \nline  \nline   \n";

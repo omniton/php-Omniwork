@@ -1,75 +1,75 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Markdown_Extra_Table extends Test_Solar_Markdown_Plugin {
-    
+
     /**
-     * 
+     *
      * Default configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Markdown_Extra_Table = array(
     );
-    
+
     /**
-     * 
+     *
      * Is the plugin expected to be a block processor?
-     * 
+     *
      * @var bool
-     * 
+     *
      */
     protected $_is_block = true;
-    
+
     /**
-     * 
+     *
      * Is the plugin expected to be a span processor?
-     * 
+     *
      * @var bool
-     * 
+     *
      */
     protected $_is_span = false;
-    
+
     protected $_plain = "
 First Header  | Second Header
 ------------- | -------------
 Content A     | Content C    
 Content B     | Content D    
 ";
-    
+
     protected $_pipes = "
 | First Header  | Second Header |
 | ------------- | ------------- |
 | Content A     | Content C     |
 | Content B     | Content D     |
 ";
-    
+
     protected $_align = "
 | Left      | Right     |
 | :-------- | --------: |
 | Content A | Content C |
 | Content B | Content D |
 ";
-    
-    
+
+
     /**
-     * 
+     *
      * Test -- Get the list of characters this plugin uses for parsing.
-     * 
+     *
      */
     public function testGetChars()
     {
         $this->todo('stub');
     }
-    
+
     /**
-     * 
+     *
      * Test -- Transforms Markdown syntax to XHTML tables.
-     * 
+     *
      */
     public function testParse()
     {
@@ -78,7 +78,7 @@ Content B     | Content D
         $actual = $this->_plugin->parse($source);
         $this->assertRegex($actual, "@$expect@");
     }
-   
+     
     public function testParse_pipes()
     {
         $source = "foo bar\n$this->_pipes\nbaz dib";
@@ -86,7 +86,7 @@ Content B     | Content D
         $actual = $this->_plugin->parse($source);
         $this->assertRegex($actual, "@$expect@");
     }
-   
+     
     public function testParse_align()
     {
         $source = "foo bar\n$this->_align\nbaz dib";
@@ -94,32 +94,32 @@ Content B     | Content D
         $actual = $this->_plugin->parse($source);
         $this->assertRegex($actual, "@$expect@");
     }
-    
+
     /**
-     * 
+     *
      * Test -- Resets this plugin to its original state (for multiple parsings).
-     * 
+     *
      */
     public function testReset()
     {
         $this->todo('stub');
     }
-    
+
     /**
-     * 
+     *
      * Test -- Sets the "parent" Markdown object.
-     * 
+     *
      */
     public function testSetMarkdown()
     {
         $this->todo('stub');
     }
-    
+
     public function testRender()
     {
         $source = $this->_plain;
         $actual = $this->_render($source);
-        
+
         $expect = '
 <table>
     <thead>
@@ -139,15 +139,15 @@ Content B     | Content D
         </tr>
     </tbody>
 </table>';
-        
+
         $this->assertSame(trim($actual), trim($expect));
     }
-    
+
     public function testRender_pipes()
     {
         $source = $this->_pipes;
         $actual = $this->_render($source);
-        
+
         $expect = '
 <table>
     <thead>
@@ -167,15 +167,15 @@ Content B     | Content D
         </tr>
     </tbody>
 </table>';
-        
+
         $this->assertSame(trim($actual), trim($expect));
     }
-    
+
     public function testRender_align()
     {
         $source = $this->_align;
         $actual = $this->_render($source);
-        
+
         $expect = '
 <table>
     <thead>
@@ -195,7 +195,7 @@ Content B     | Content D
         </tr>
     </tbody>
 </table>';
-        
+
         $this->assertSame(trim($actual), trim($expect));
     }
 }

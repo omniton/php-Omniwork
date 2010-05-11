@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateIsoTime extends Test_Solar_Filter_ValidateIsoTimestamp {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateIsoTime = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates that the value is an ISO 8601 time string (hh:ii::ss format).
-     * 
+     *
      */
     public function testValidateIsoTime()
     {
@@ -33,7 +33,7 @@ class Test_Solar_Filter_ValidateIsoTime extends Test_Solar_Filter_ValidateIsoTim
             $this->assertTrue($this->_filter->validateIsoTime($val));
         }
     }
-    
+
     public function testValidateIsoTime_badOrBlank()
     {
         $test = array(
@@ -46,12 +46,12 @@ class Test_Solar_Filter_ValidateIsoTime extends Test_Solar_Filter_ValidateIsoTim
             '12:  :56',
             '12:34   ',
             '12:34'
-        );
-        foreach ($test as $val) {
-            $this->assertFalse($this->_filter->validateIsoTime($val));
-        }
+            );
+            foreach ($test as $val) {
+                $this->assertFalse($this->_filter->validateIsoTime($val));
+            }
     }
-    
+
     public function testValidateIsoTime_notRequired()
     {
         $this->_filter->setRequire(false);

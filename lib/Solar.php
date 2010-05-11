@@ -190,8 +190,8 @@ class Solar
             Solar_Config::set('Solar', null, Solar::$_Solar);
         } else {
             Solar_Config::set('Solar', null, array_merge(
-                Solar::$_Solar,
-                (array) $arch_config
+            Solar::$_Solar,
+            (array) $arch_config
             ));
         }
 
@@ -451,7 +451,7 @@ class Solar
      *
      */
     public static function exception($spec, $code, $text = '',
-        $info = array())
+    $info = array())
     {
         // is the spec an object?
         if (is_object($spec)) {
@@ -572,15 +572,15 @@ class Solar
         // Create a list of all of the keys from the super-global values.
         // Use array_keys() here to preserve key integrity.
         $keys = array_merge(
-            array_keys($_ENV),
-            array_keys($_GET),
-            array_keys($_POST),
-            array_keys($_COOKIE),
-            array_keys($_SERVER),
-            array_keys($_FILES),
-            // $_SESSION is null if you have not started the session yet.
-            // This insures that a check is performed regardless.
-            isset($_SESSION) && is_array($_SESSION) ? array_keys($_SESSION) : array()
+        array_keys($_ENV),
+        array_keys($_GET),
+        array_keys($_POST),
+        array_keys($_COOKIE),
+        array_keys($_SERVER),
+        array_keys($_FILES),
+        // $_SESSION is null if you have not started the session yet.
+        // This insures that a check is performed regardless.
+        isset($_SESSION) && is_array($_SESSION) ? array_keys($_SESSION) : array()
         );
 
         // Unset the globals.

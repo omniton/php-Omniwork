@@ -1,7 +1,7 @@
 <?php
 return array (
   'test_autoinc_primary' => 
-  array (
+array (
     'name' => 'test_autoinc_primary',
     'type' => 'int',
     'size' => NULL,
@@ -10,9 +10,9 @@ return array (
     'require' => true,
     'primary' => true,
     'autoinc' => true,
-  ),
+),
   'test_require' => 
-  array (
+array (
     'name' => 'test_require',
     'type' => 'int',
     'size' => NULL,
@@ -21,9 +21,9 @@ return array (
     'require' => true,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_bool' => 
-  array (
+array (
     'name' => 'test_bool',
     'type' => 'bool',
     'size' => NULL,
@@ -32,9 +32,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_char' => 
-  array (
+array (
     'name' => 'test_char',
     'type' => 'char',
     'size' => 3,
@@ -43,9 +43,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_varchar' => 
-  array (
+array (
     'name' => 'test_varchar',
     'type' => 'varchar',
     'size' => 7,
@@ -54,9 +54,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_smallint' => 
-  array (
+array (
     'name' => 'test_smallint',
     'type' => 'smallint',
     'size' => NULL,
@@ -65,9 +65,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_int' => 
-  array (
+array (
     'name' => 'test_int',
     'type' => 'int',
     'size' => NULL,
@@ -76,9 +76,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_bigint' => 
-  array (
+array (
     'name' => 'test_bigint',
     'type' => 'bigint',
     'size' => NULL,
@@ -87,9 +87,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_numeric_size' => 
-  array (
+array (
     'name' => 'test_numeric_size',
     'type' => 'numeric',
     'size' => 7,
@@ -98,9 +98,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_numeric_scope' => 
-  array (
+array (
     'name' => 'test_numeric_scope',
     'type' => 'numeric',
     'size' => 7,
@@ -109,9 +109,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_float' => 
-  array (
+array (
     'name' => 'test_float',
     'type' => 'float',
     'size' => NULL,
@@ -120,9 +120,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_clob' => 
-  array (
+array (
     'name' => 'test_clob',
     'type' => 'clob',
     'size' => NULL,
@@ -131,9 +131,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_date' => 
-  array (
+array (
     'name' => 'test_date',
     'type' => 'date',
     'size' => NULL,
@@ -142,9 +142,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_time' => 
-  array (
+array (
     'name' => 'test_time',
     'type' => 'time',
     'size' => NULL,
@@ -153,9 +153,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_timestamp' => 
-  array (
+array (
     'name' => 'test_timestamp',
     'type' => 'timestamp',
     'size' => NULL,
@@ -164,9 +164,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_default_null' => 
-  array (
+array (
     'name' => 'test_default_null',
     'type' => 'char',
     'size' => 3,
@@ -175,9 +175,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_default_string' => 
-  array (
+array (
     'name' => 'test_default_string',
     'type' => 'varchar',
     'size' => 7,
@@ -186,9 +186,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_default_integer' => 
-  array (
+array (
     'name' => 'test_default_integer',
     'type' => 'int',
     'size' => NULL,
@@ -197,9 +197,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_default_numeric' => 
-  array (
+array (
     'name' => 'test_default_numeric',
     'type' => 'numeric',
     'size' => 7,
@@ -208,9 +208,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'test_default_ignore' => 
-  array (
+array (
     'name' => 'test_default_ignore',
     'type' => 'int',
     'size' => NULL,
@@ -219,5 +219,5 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
 );

@@ -1,18 +1,18 @@
 <?php
 /**
- * 
+ *
  * Locale file.  Returns the strings for a specific language.
- * 
+ *
  * @category Solar
- * 
+ *
  * @package Solar_User
- * 
+ *
  * @author Paul M. Jones <pmjones@solarphp.com>
- * 
+ *
  * @license http://opensource.org/licenses/bsd-license.php BSD
- * 
+ *
  * @version $Id: fr_FR.php 2007 2006-12-07 14:57:54Z pmjones $
- * 
+ *
  */
 return array(
     'VALID'   => '',

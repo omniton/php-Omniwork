@@ -1,21 +1,21 @@
 <?php
 /**
- * 
+ *
  * Adapter class test.
- * 
+ *
  */
 class Test_Solar_Auth_Adapter_Ini extends Test_Solar_Auth_Adapter {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Auth_Adapter_Ini = array(
     );
-    
+
     protected function _preConfig()
     {
         parent::_preConfig();
@@ -23,7 +23,7 @@ class Test_Solar_Auth_Adapter_Ini extends Test_Solar_Auth_Adapter {
         $file = $dir . 'users.ini';
         $this->_Test_Solar_Auth_Adapter_Ini['file'] = $file;
     }
-    
+
     protected function _postConstruct()
     {
         parent::_postConstruct();

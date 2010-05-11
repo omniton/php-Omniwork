@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_ValidateBlank extends Test_Solar_Filter_Abstract {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_ValidateBlank = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Validates that the value is null, or is a string composed only of whitespace.
-     * 
+     *
      */
     public function testValidateBlank()
     {
@@ -35,11 +35,11 @@ class Test_Solar_Filter_ValidateBlank extends Test_Solar_Filter_Abstract {
             $this->assertTrue($this->_filter->validateBlank($val));
         }
     }
-    
+
     public function testValidateBlank_bad()
     {
         $test = array(
-            0, 1, 2, 5,
+        0, 1, 2, 5,
             '0', '1', '2', '5',
             "Seven 8 nine",
             "non:alpha-numeric's",

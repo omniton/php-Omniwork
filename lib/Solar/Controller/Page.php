@@ -303,7 +303,7 @@ abstract class Solar_Controller_Page extends Solar_Base
      *
      */
     protected $_format_type = array(
-        null        => 'text/html',
+    null        => 'text/html',
         'atom'      => 'application/atom+xml',
         'css'       => 'text/css',
         'htm'       => 'text/html',
@@ -356,7 +356,7 @@ abstract class Solar_Controller_Page extends Solar_Base
         // create the session object for this class
         $this->_session = Solar::factory(
             'Solar_Session',
-            array('class' => $class)
+        array('class' => $class)
         );
 
         // get the registered response object
@@ -369,7 +369,7 @@ abstract class Solar_Controller_Page extends Solar_Base
             $this->_controller = preg_replace(
                 '/([a-z])([A-Z])/',
                 '$1-$2',
-                $this->_controller
+            $this->_controller
             );
             $this->_controller = strtolower($this->_controller);
         }
@@ -628,8 +628,8 @@ abstract class Solar_Controller_Page extends Solar_Base
         // set the template name from the view and format
         // TODO adapter specific file extention
         $tpl = $this->_view
-             . ($this->_format ? ".{$this->_format}" : "")
-             . ".php";
+        . ($this->_format ? ".{$this->_format}" : "")
+        . ".php";
 
         // fetch the view
         try {
@@ -762,7 +762,7 @@ abstract class Solar_Controller_Page extends Solar_Base
         $classPath = str_replace('_', DIRECTORY_SEPARATOR, $classes[0]);
 
         $stack[] = Solar_Dir::fix(PATH_VAR . '/theme/'. array_value($this->_config, 'theme')
-            . DIRECTORY_SEPARATOR . $classPath) . 'View';
+        . DIRECTORY_SEPARATOR . $classPath) . 'View';
         if (array_value($this->_config, 'theme') != 'default') {
             $stack[] = Solar_Dir::fix(PATH_VAR . '/theme/default/' . $classPath) . 'View';
         }
@@ -807,7 +807,7 @@ abstract class Solar_Controller_Page extends Solar_Base
         $classPath = str_replace('_', DIRECTORY_SEPARATOR, $classes[0]);
 
         $stack[] = Solar_Dir::fix(PATH_VAR . '/theme/'. array_value($this->_config, 'theme')
-            . DIRECTORY_SEPARATOR . $classPath) . 'Layout';
+        . DIRECTORY_SEPARATOR . $classPath) . 'Layout';
         if (array_value($this->_config, 'theme') != 'default') {
             $stack[] = Solar_Dir::fix(PATH_VAR . '/theme/default/' . $classPath) . 'Layout';
         }
@@ -880,7 +880,7 @@ abstract class Solar_Controller_Page extends Solar_Base
         // if the first param is the controller name, drop it.
         // needed when no spec is passed and we're using the default URI.
         $shift = ! empty($this->_info[0])
-              && $this->_info[0] == $this->_controller;
+        && $this->_info[0] == $this->_controller;
 
         if ($shift) {
             array_shift($this->_info);
@@ -1042,7 +1042,7 @@ abstract class Solar_Controller_Page extends Solar_Base
     protected function _info($key, $val = null)
     {
         $exists = array_key_exists($key, $this->_info)
-               && $this->_info[$key] !== null;
+        && $this->_info[$key] !== null;
 
         if ($exists) {
             return $this->_info[$key];
@@ -1069,7 +1069,7 @@ abstract class Solar_Controller_Page extends Solar_Base
     protected function _query($key, $val = null)
     {
         $exists = array_key_exists($key, $this->_query)
-               && $this->_query[$key] !== null;
+        && $this->_query[$key] !== null;
 
         if ($exists) {
             return $this->_query[$key];
@@ -1174,8 +1174,8 @@ abstract class Solar_Controller_Page extends Solar_Base
             // run the action method, which may itself _forward() to other
             // actions.  pass all parameters in order.
             call_user_func_array(
-                array($this, $method),
-                $params
+            array($this, $method),
+            $params
             );
         }
 
@@ -1280,8 +1280,8 @@ abstract class Solar_Controller_Page extends Solar_Base
 
         // look for "all actions" formats
         $all = empty($this->_action_format['*'])
-             ? array()
-             : (array) $this->_action_format['*'];
+        ? array()
+        : (array) $this->_action_format['*'];
 
         // look for the action as passed (foo-bar)
         $key = $action;

@@ -34,7 +34,7 @@ class Solar_View_Helper_GetText extends Solar_View_Helper
     public function getText($key, $num = 1, $replace = null)
     {
         return $this->_view->escape(
-            $this->_view->getTextRaw($key, $num, $replace)
+        $this->_view->getTextRaw($key, $num, $replace)
         );
     }
 

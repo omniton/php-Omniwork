@@ -391,9 +391,9 @@ class Solar_View extends Solar_Base
     public function escape($value)
     {
         return htmlspecialchars(
-            $value,
-            $this->_escape['quotes'],
-            $this->_escape['charset']
+        $value,
+        $this->_escape['quotes'],
+        $this->_escape['charset']
         );
     }
 

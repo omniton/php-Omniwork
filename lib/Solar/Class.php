@@ -50,7 +50,7 @@ class Solar_Class
                 'Solar_Class',
                 'ERR_AUTOLOAD_EMPTY',
                 'No class or interface named for loading.',
-                array('name' => $name)
+            array('name' => $name)
             );
         }
 
@@ -58,7 +58,7 @@ class Solar_Class
         // do not use autoload, because this method is registered with
         // spl_autoload already.
         $exists = class_exists($name, false)
-               || interface_exists($name, false);
+        || interface_exists($name, false);
 
         if ($exists) {
             return;
@@ -75,14 +75,14 @@ class Solar_Class
         // do not use autoload, because this method is registered with
         // spl_autoload already.
         $exists = class_exists($name, false)
-               || interface_exists($name, false);
+        || interface_exists($name, false);
 
         if (! $exists) {
             throw Solar::exception(
                 'Solar_Class',
                 'ERR_AUTOLOAD_FAILED',
                 'Class or interface does not exist in loaded file',
-                array('name' => $name, 'file' => $file)
+            array('name' => $name, 'file' => $file)
             );
         }
     }
@@ -112,7 +112,7 @@ class Solar_Class
             // pre-convert namespace portion to file path
             $namespace = substr($spec, 0, $pos);
             $namespace = str_replace('\\', DIRECTORY_SEPARATOR, $namespace)
-                       . DIRECTORY_SEPARATOR;
+            . DIRECTORY_SEPARATOR;
 
             // class portion
             $class = substr($spec, $pos + 1);
@@ -120,8 +120,8 @@ class Solar_Class
 
         // convert class underscores, and done
         return $namespace
-             . str_replace('_',  DIRECTORY_SEPARATOR, $class)
-             . '.php';
+        . str_replace('_',  DIRECTORY_SEPARATOR, $class)
+        . '.php';
     }
 
     /**
@@ -196,7 +196,7 @@ class Solar_Class
                 'Solar_Class',
                 'ERR_NO_DIR_FOR_CLASS',
                 'Directory does not exist',
-                array('class' => $class, 'base' => $base)
+            array('class' => $class, 'base' => $base)
             );
         } else {
             return Solar_Dir::fix($dir . DIRECTORY_SEPARATOR. $sub);

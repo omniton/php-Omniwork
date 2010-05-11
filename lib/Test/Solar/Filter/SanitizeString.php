@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Filter_SanitizeString extends Test_Solar_Filter_Abstract {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Filter_SanitizeString = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Forces the value to a string.
-     * 
+     *
      */
     public function testSanitizeString()
     {

@@ -1,31 +1,31 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_View_Helper_FormRadio extends Test_Solar_View_Helper {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_View_Helper_FormRadio = array(
     );
-    
+
     // -----------------------------------------------------------------
-    // 
+    //
     // Test methods.
-    // 
+    //
     // -----------------------------------------------------------------
-    
+
     /**
-     * 
+     *
      * Test -- Generates a set of radio button elements.
-     * 
+     *
      */
     public function testFormRadio()
     {
@@ -35,9 +35,9 @@ class Test_Solar_View_Helper_FormRadio extends Test_Solar_View_Helper {
                 'foo' => 'bar',
                 'baz' => 'dib',
                 'zim' => 'gir',
-            ),
+        ),
         );
-        
+
         // no selection
         $actual = $this->_view->formRadio($info);
         $tmp = array();
@@ -47,7 +47,7 @@ class Test_Solar_View_Helper_FormRadio extends Test_Solar_View_Helper {
         $tmp[] = '<label class="radio"><input type="radio" name="test" value="zim" /> gir</label>';
         $expect = implode("\n", $tmp);
         $this->assertSame($actual, $expect);
-        
+
         // selected
         $info['value'] = 'baz';
         $actual = $this->_view->formRadio($info);

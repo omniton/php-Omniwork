@@ -1,25 +1,25 @@
 <?php
 /**
- * 
+ *
  * Factory class test.
- * 
+ *
  */
 class Test_Solar_Mail_Transport extends Solar_Test {
-    
+
     /**
-     * 
+     *
      * Default configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Mail_Transport = array(
     );
-    
+
     /**
-     * 
+     *
      * Test -- Constructor.
-     * 
+     *
      */
     public function test__construct()
     {
@@ -29,11 +29,11 @@ class Test_Solar_Mail_Transport extends Solar_Test {
         $expect = 'Solar_Mail_Transport';
         $this->assertInstance($actual, $expect);
     }
-    
+
     /**
-     * 
+     *
      * Test -- Disallow all calls to methods besides factory() and the existing support methods.
-     * 
+     *
      */
     final public function test__call()
     {
@@ -47,11 +47,11 @@ class Test_Solar_Mail_Transport extends Solar_Test {
             $this->assertTrue(true);
         }
     }
-    
+
     /**
-     * 
+     *
      * Test -- Factory method for returning adapter objects.
-     * 
+     *
      */
     public function testFactory()
     {

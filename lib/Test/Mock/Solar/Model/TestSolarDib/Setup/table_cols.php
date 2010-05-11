@@ -1,7 +1,7 @@
 <?php
 return array (
   'id' => 
-  array (
+array (
     'name' => 'id',
     'type' => 'int',
     'size' => NULL,
@@ -10,9 +10,9 @@ return array (
     'require' => true,
     'primary' => true,
     'autoinc' => true,
-  ),
+),
   'created' => 
-  array (
+array (
     'name' => 'created',
     'type' => 'timestamp',
     'size' => NULL,
@@ -21,9 +21,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'updated' => 
-  array (
+array (
     'name' => 'updated',
     'type' => 'timestamp',
     'size' => NULL,
@@ -32,9 +32,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'inherit' => 
-  array (
+array (
     'name' => 'inherit',
     'type' => 'varchar',
     'size' => 30,
@@ -43,9 +43,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'name' => 
-  array (
+array (
     'name' => 'name',
     'type' => 'varchar',
     'size' => 255,
@@ -54,9 +54,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'email' => 
-  array (
+array (
     'name' => 'email',
     'type' => 'varchar',
     'size' => 255,
@@ -65,9 +65,9 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
   'uri' => 
-  array (
+array (
     'name' => 'uri',
     'type' => 'varchar',
     'size' => 255,
@@ -76,5 +76,5 @@ return array (
     'require' => false,
     'primary' => false,
     'autoinc' => false,
-  ),
+),
 );

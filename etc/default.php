@@ -24,6 +24,7 @@ $config['Solar']['registry_set'] = array(
     'controller_front' => 'Solar_Controller_Front',
     'session'          => 'Solar_Session',
     'sql'              => 'Solar_Sql',
+    'log'              => 'Solar_Log',
 );
 
 /**
@@ -35,6 +36,13 @@ $config['Solar_Sql'] = array(
 
 $config['Solar_Sql_Model_Catalog'] = array(
     'classes' => array(),
+);
+
+/**
+ * log adapter to use
+ */
+$config['Solar_Log'] = array(
+    'adapter' => 'Solar_Log_Adapter_Syslog',
 );
 
 /**

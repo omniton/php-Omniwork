@@ -450,8 +450,8 @@ class Solar_View_Adapter_Helper_Head extends Solar_View_Helper
 
         // concat with indents and newlines, and done!
         return $this->_indent
-             . implode("\n{$this->_indent}", $html)
-             . "\n";
+        . implode("\n{$this->_indent}", $html)
+        . "\n";
     }
 
     /**

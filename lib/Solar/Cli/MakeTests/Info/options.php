@@ -5,5 +5,5 @@ return array(
         'param' => null,
         'value' => false,
         'descr' => 'Make tests only for the named class; do not descend into subdirectories.',
-    ),
+),
 );

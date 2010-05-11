@@ -142,7 +142,7 @@ class Solar_Dir
             // remove leading and trailing separators, and force exactly
             // one trailing separator
             $sub = trim($sub, DIRECTORY_SEPARATOR)
-                 . DIRECTORY_SEPARATOR;
+            . DIRECTORY_SEPARATOR;
         }
 
         return Solar_Dir::$_tmp . DIRECTORY_SEPARATOR . $sub;
@@ -259,10 +259,10 @@ class Solar_Dir
         $class  = 'Solar_Dir';
         $locale = Solar_Registry::get('locale');
         return Solar::exception(
-            $class,
-            $code,
-            $locale->fetch($class, $code, 1, $info),
-            (array) $info
+        $class,
+        $code,
+        $locale->fetch($class, $code, 1, $info),
+        (array) $info
         );
     }
 }

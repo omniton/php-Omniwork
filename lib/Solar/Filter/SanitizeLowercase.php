@@ -31,7 +31,7 @@ class Solar_Filter_SanitizeLowercase extends Solar_Filter_Abstract
     {
         // if the value is not required, and is blank, sanitize to null
         $null = ! $this->_filter->getRequire() &&
-                $this->_filter->validateBlank($value);
+        $this->_filter->validateBlank($value);
 
         if ($null) {
             return null;

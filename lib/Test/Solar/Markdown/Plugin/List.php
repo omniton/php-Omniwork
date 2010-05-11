@@ -1,53 +1,53 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Markdown_Plugin_List extends Test_Solar_Markdown_Plugin {
-    
+
     /**
-     * 
+     *
      * Default configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Markdown_Plugin_List = array(
     );
-    
+
     /**
-     * 
+     *
      * Is the plugin expected to be a block processor?
-     * 
+     *
      * @var bool
-     * 
+     *
      */
     protected $_is_block = true;
-    
+
     /**
-     * 
+     *
      * Is the plugin expected to be a span processor?
-     * 
+     *
      * @var bool
-     * 
+     *
      */
     protected $_is_span = false;
-    
+
     /**
-     * 
+     *
      * Test -- Get the list of characters this plugin uses for parsing.
-     * 
+     *
      */
     public function testGetChars()
     {
         $this->todo('stub');
     }
-    
+
     /**
-     * 
+     *
      * Test -- Makes ordered (numbered) and unordered (bulleted) XHTML lists.
-     * 
+     *
      */
     public function testParse()
     {
@@ -66,7 +66,7 @@ class Test_Solar_Markdown_Plugin_List extends Test_Solar_Markdown_Plugin {
         $source[] = "";
         $source[] = "baz";
         $source = implode("\n", $source). "\n\n";
-        
+
         $expect = array();
         $expect[] = 'foo';
         $expect[] = "";
@@ -78,25 +78,25 @@ class Test_Solar_Markdown_Plugin_List extends Test_Solar_Markdown_Plugin {
         $expect[] = "";
         $expect[] = 'baz';
         $expect = implode("\n", $expect);
-        
+
         $actual = $this->_plugin->parse($source);
         $this->assertRegex($actual, "@$expect@");
     }
-    
+
     /**
-     * 
+     *
      * Test -- Resets for a new transformation.
-     * 
+     *
      */
     public function testReset()
     {
         $this->todo('stub');
     }
-    
+
     /**
-     * 
+     *
      * Test -- Sets the "parent" Markdown object.
-     * 
+     *
      */
     public function testSetMarkdown()
     {
@@ -116,7 +116,7 @@ class Test_Solar_Markdown_Plugin_List extends Test_Solar_Markdown_Plugin {
         $source[] = "2. zim";
         $source[] = "3. gir";
         $source = implode("\n", $source). "\n\n";
-        
+
         $expect = array();
         $expect[] = $this->_tag('ul');
         $expect[] = $this->_tag('li') . "foo" . $this->_tag('/li');
@@ -132,11 +132,11 @@ class Test_Solar_Markdown_Plugin_List extends Test_Solar_Markdown_Plugin {
         $expect[] = $this->_tag('li') . "gir" . $this->_tag('/li');
         $expect[] = $this->_tag('/ol');
         $expect = implode("\n*", $expect);
-        
+
         $actual = $this->_render($source);
         $this->assertRegex($actual, "@$expect@");
     }
-    
+
     // parse a nested list series
     public function testRender_nested()
     {
@@ -147,7 +147,7 @@ class Test_Solar_Markdown_Plugin_List extends Test_Solar_Markdown_Plugin {
         $source[] = "\t* zim";
         $source[] = "\t* gir";
         $source = implode("\n", $source). "\n\n";
-        
+
         $expect = array();
         $expect[] = $this->_tag('ul');
         $expect[] = $this->_tag('li') . "foo";
@@ -162,7 +162,7 @@ class Test_Solar_Markdown_Plugin_List extends Test_Solar_Markdown_Plugin {
         $expect[] = $this->_tag('/ul') . $this->_tag('/li');
         $expect[] = $this->_tag('/ul');
         $expect = implode('\s*', $expect);
-        
+
         $actual = $this->_render($source);
         $this->assertRegex($actual, "@$expect@");
     }

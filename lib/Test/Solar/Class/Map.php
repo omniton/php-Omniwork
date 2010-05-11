@@ -1,51 +1,51 @@
 <?php
 /**
- * 
+ *
  * Concrete class test.
- * 
+ *
  */
 class Test_Solar_Class_Map extends Solar_Test {
-    
+
     /**
-     * 
+     *
      * Configuration values.
-     * 
+     *
      * @var array
-     * 
+     *
      */
     protected $_Test_Solar_Class_Map = array(
     );
-    
+
     // -----------------------------------------------------------------
-    // 
+    //
     // Test methods.
-    // 
+    //
     // -----------------------------------------------------------------
-    
+
     /**
-     * 
+     *
      * Test -- Constructor.
-     * 
+     *
      */
     public function test__construct()
     {
         $obj = Solar::factory('Solar_Class_Map');
         $this->assertInstance($obj, 'Solar_Class_Map');
     }
-    
+
     /**
-     * 
+     *
      * Test -- Gets the class-to-file map for a class hierarchy.
-     * 
+     *
      */
     public function testFetch()
     {
         $dir  = Solar_Class::dir('Solar', '../tests');
         $base = realpath($dir);
-        
+
         $map = Solar::factory('Solar_Class_Map');
         $map->setBase($base);
-        
+
         $actual = $map->fetch('Mock_Solar');
         $expect = array(
             "Mock_Solar_Controller_Page" => "$base/Mock/Solar/Controller/Page.php",
@@ -103,40 +103,40 @@ class Test_Solar_Class_Map extends Solar_Test {
             "Mock_Solar_Model_Users_Metadata" => "$base/Mock/Solar/Model/Users/Metadata.php",
             "Mock_Solar_Model_Users_Record" => "$base/Mock/Solar/Model/Users/Record.php",
         );
-        
+
         $this->assertSame($actual, $expect);
     }
-    
+
     /**
-     * 
+     *
      * Test -- Gets the base directory for the class map.
-     * 
+     *
      */
     public function testGetBase()
     {
         $dir  = Solar_Class::dir('Solar', '..');
         $base = Solar_Dir::fix(realpath($dir));
-        
+
         $map = Solar::factory('Solar_Class_Map');
         $map->setBase($base);
-        
+
         $actual = $map->getBase();
         $this->assertSame($actual, $base);
     }
-    
+
     /**
-     * 
+     *
      * Test -- Sets the base directory for the class map.
-     * 
+     *
      */
     public function testSetBase()
     {
         $dir  = Solar_Class::dir('Solar', '..');
         $base = Solar_Dir::fix(realpath($dir));
-        
+
         $map = Solar::factory('Solar_Class_Map');
         $map->setBase($base);
-        
+
         $actual = $map->getBase();
         $this->assertSame($actual, $base);
     }

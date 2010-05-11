@@ -233,8 +233,8 @@ class Solar_Filter extends Solar_Base
     {
         $filter = $this->getFilter($method);
         return call_user_func_array(
-            array($filter, $method),
-            $params
+        array($filter, $method),
+        $params
         );
     }
 
@@ -641,7 +641,7 @@ class Solar_Filter extends Solar_Base
             // "blank" means the key does not exist in the data, or that it
             // validates as a blank value
             $blank = ! isset($this->_data[$key]) ||
-                     $this->validateBlank($this->_data[$key]);
+            $this->validateBlank($this->_data[$key]);
 
             // is it blank?
             if ($blank) {
