@@ -80,7 +80,7 @@ $config['Solar_Controller_Front'] = array(
 /**
  * load application config
  */
-include PATH_VAR . '/config.php';
+include PATH_VAR . DIRECTORY_SEPARATOR . 'config.php';
 
 /**
  * done!
