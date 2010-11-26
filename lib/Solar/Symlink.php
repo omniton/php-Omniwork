@@ -15,7 +15,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: Symlink.php 4272 2009-12-17 21:56:32Z pmjones $
+ * @version $Id: Symlink.php 4703 2010-09-14 17:13:31Z pmjones $
  *
  */
 class Solar_Symlink
@@ -123,8 +123,9 @@ class Solar_Symlink
             $cmd = "cd $dir;";
         }
 
-        // make the link
-        $cmd .= "ln -s $src $tgt";
+        // make the link. redirect stderr to stdout so we can capture the
+        // last line, in case of errors.
+        $cmd .= "ln -s $src $tgt 2>&1";
 
         // done!
         return exec($cmd);
@@ -132,7 +133,7 @@ class Solar_Symlink
 
     /**
      *
-     * Returns the command to create a directory symlink on Windows systems.
+     * Creates a directory symlink on Windows systems.
      *
      * @param string $src The source path of the real directory.
      *
@@ -142,7 +143,7 @@ class Solar_Symlink
      * symlink, typically the target directory; this helps when making
      * relative symlinks.
      *
-     * @return string The command to make a directory symlink.
+     * @return string Empty on success, or the error message on failure.
      *
      */
     protected static function _makeWinDir($src, $tgt, $dir)
@@ -156,15 +157,23 @@ class Solar_Symlink
         }
 
         // make the link
-        $cmd .= "mklink /D $src $tgt";
+        $cmd .= "mklink /D $tgt $src";
 
-        // done!
-        return exec($cmd);
+        // run the command
+        $result = exec($cmd);
+
+        // windows returns a message on both success and failure.
+        // the success message starts with
+        if (substr($result, 0, 21) == 'symbolic link created') {
+            return '';
+        } else {
+            return $result;
+        }
     }
 
     /**
      *
-     * Returns the command to create a file symlink on Windows systems.
+     * Creates a file symlink on Windows systems.
      *
      * @param string $src The source path of the real file.
      *
@@ -174,7 +183,7 @@ class Solar_Symlink
      * symlink, typically the target directory; this helps when making
      * relative symlinks.
      *
-     * @return string The command to make a directory symlink.
+     * @return string Empty on success, or the error message on failure.
      *
      */
     protected static function _makeWinFile($src, $tgt, $dir)
@@ -188,10 +197,59 @@ class Solar_Symlink
         }
 
         // make the link
-        $cmd .= "mklink $src $tgt";
+        $cmd .= "mklink $tgt $src";
 
-        // done!
-        return exec($cmd);
+        // run the command
+        $result = exec($cmd);
+
+        // windows returns a message on both success and failure.
+        // the success message starts with
+        if (substr($result, 0, 21) == 'symbolic link created') {
+            return '';
+        } else {
+            return $result;
+        }
+    }
+
+    /**
+     *
+     * Removes a file or directory symbolic link.
+     *
+     * Actually, this will remove the file or directory even if it's not
+     * a symbolic link, so be careful with it.
+     *
+     * @param string $path The symbolic link to remove.
+     *
+     * @return void
+     *
+     */
+    public static function remove($path)
+    {
+        // are we on a windows system prior to NT6?
+        $is_win = strtolower(substr(PHP_OS, 0, 3)) == 'win';
+        if ($is_win && php_uname('r') < 6) {
+            throw Solar_Symlink::_exception('ERR_WINDOWS_VERSION');
+        }
+
+        // does the path exist for removal?
+        $is_dir  = Solar_Dir::exists($path);
+        $is_file = Solar_File::exists($path);
+        if (! $is_dir && ! $is_file) {
+            throw Solar_Symlink::_exception('ERR_PATH_NOT_FOUND', array(
+                'path' => $path,
+            ));
+        }
+
+        // how to remove?
+        if ($is_win) {
+            // have to double up on removals because windows reports all
+            // symlinks as files, even if they point to dirs.
+            @unlink($path);
+            Solar_Dir::rmdir($path);
+        } else {
+            // unix file or dir
+            @unlink($path);
+        }
     }
 
     /**

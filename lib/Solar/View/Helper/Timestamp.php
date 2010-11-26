@@ -33,7 +33,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: Timestamp.php 4285 2009-12-31 02:18:15Z pmjones $
+ * @version $Id: Timestamp.php 4533 2010-04-23 16:35:15Z pmjones $
  *
  */
 class Solar_View_Helper_Timestamp extends Solar_View_Helper
@@ -45,15 +45,15 @@ class Solar_View_Helper_Timestamp extends Solar_View_Helper
      * @config bool strftime When true, uses strftime() instead of date() for formatting
      *   dates. Default is false.
      *
-     * @config string format The default output formatting using [[php:date() | ]] codes.
-     *   When `strftime` is true, uses [[php:strftime() | ]] codes instead.
+     * @config string format The default output formatting using [[php::date() | ]] codes.
+     *   When `strftime` is true, uses [[php::strftime() | ]] codes instead.
      *   Default is 'Y-m-d H:i:s' (using date() format codes).
      *
      * @config string tz_origin Consider all input timestamps as being from this timezone.
-     *   Default is the value of [[php:date_default_timezone_get() | ]].
+     *   Default is the value of [[php::date_default_timezone_get() | ]].
      *
      * @config string tz_output Output all timestamps after converting to this timezone.
-     *   Default is the value of [[php:date_default_timezone_get() | ]].
+     *   Default is the value of [[php::date_default_timezone_get() | ]].
      *
      *
      * @var array

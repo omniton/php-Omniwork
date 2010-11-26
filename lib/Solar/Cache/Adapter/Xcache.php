@@ -18,7 +18,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: Xcache.php 4442 2010-02-26 16:33:06Z pmjones $
+ * @version $Id: Xcache.php 4619 2010-06-21 15:56:46Z pmjones $
  *
  * @todo Does not work with objects.  Need to add custom support for them.
  * <http://trac.lighttpd.net/xcache/wiki/XcacheApi>
@@ -173,11 +173,12 @@ class Solar_Cache_Adapter_Xcache extends Solar_Cache_Adapter
             return;
         }
 
+        // make sure we have a key to increment (the add() method adds the
+        // prefix on its own, so no need to use entry() here)
+        $this->add($key, 0, null, $this->_life);
+
         // modify the key to add the prefix
         $key = $this->entry($key);
-
-        // make sure we have a key to increment
-        $this->add($key, 0, null, $this->_life);
 
         // let xcache do the increment and retain its value
         $val = xcache_inc($key, $amt, $this->_life);

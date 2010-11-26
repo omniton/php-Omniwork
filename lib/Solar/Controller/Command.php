@@ -15,7 +15,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: Command.php 4387 2010-02-14 18:33:12Z pmjones $
+ * @version $Id: Command.php 4548 2010-05-01 15:03:17Z pmjones $
  *
  */
 class Solar_Controller_Command extends Solar_Base
@@ -294,10 +294,7 @@ class Solar_Controller_Command extends Solar_Base
     protected function _out($text = null, $num = 1, $replace = null)
     {
         $string = $this->locale($text, $num, $replace);
-        fwrite(
-        $this->_stdout,
-        Solar_Vt100::format($string)
-        );
+        Solar_Vt100::write($this->_stdout, $string);
     }
 
     /**
@@ -322,10 +319,7 @@ class Solar_Controller_Command extends Solar_Base
     protected function _outln($text = null, $num = 1, $replace = null)
     {
         $string = $this->locale($text, $num, $replace);
-        fwrite(
-        $this->_stdout,
-        Solar_Vt100::format($string) . PHP_EOL
-        );
+        Solar_Vt100::write($this->_stdout, $string, PHP_EOL);
     }
 
     /**
@@ -350,10 +344,7 @@ class Solar_Controller_Command extends Solar_Base
     protected function _err($text = null, $num = 1, $replace = null)
     {
         $string = $this->locale($text, $num, $replace);
-        fwrite(
-        $this->_stderr,
-        Solar_Vt100::format($string)
-        );
+        Solar_Vt100::write($this->_stderr, $string);
     }
 
     /**
@@ -378,10 +369,7 @@ class Solar_Controller_Command extends Solar_Base
     protected function _errln($text = null, $num = 1, $replace = null)
     {
         $string = $this->locale($text, $num, $replace);
-        fwrite(
-        $this->_stderr,
-        Solar_Vt100::format($string) . PHP_EOL
-        );
+        Solar_Vt100::write($this->_stderr, $string, PHP_EOL);
     }
 
     /**

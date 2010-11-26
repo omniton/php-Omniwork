@@ -22,7 +22,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: MakeTests.php 4436 2010-02-25 21:38:34Z pmjones $
+ * @version $Id: MakeTests.php 4624 2010-06-30 21:56:24Z pmjones $
  *
  */
 class Solar_Cli_MakeTests extends Solar_Controller_Command
@@ -119,7 +119,7 @@ class Solar_Cli_MakeTests extends Solar_Controller_Command
 
             // load the class and get its API reference
             $apiref = Solar::factory('Solar_Docs_Apiref');
-            $apiref->addClass($class);
+            $apiref->addClass($class, $file);
             $api = $apiref->api[$class];
 
             // set the file name, creating if needed

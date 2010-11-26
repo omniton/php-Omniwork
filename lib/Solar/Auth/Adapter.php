@@ -11,7 +11,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: Adapter.php 4496 2010-03-04 18:45:57Z pmjones $
+ * @version $Id: Adapter.php 4623 2010-06-30 13:01:06Z pmjones $
  *
  */
 abstract class Solar_Auth_Adapter extends Solar_Base {
@@ -59,11 +59,10 @@ abstract class Solar_Auth_Adapter extends Solar_Base {
      * @config string process_logout The source_process element value indicating a logout request;
      *   default is the 'PROCESS_LOGOUT' locale key value.
      *
-     * @config callback login_callback A callback to execute after successful login, but before
-     *   the source postLogin() method is called.
+     * @config callback login_callback A callback to execute as part of the login process,
+     * whether or not login was successful.
      *
-     * @config callback logout_callback A callback to execute after successful logout, but before
-     *   the source postLogout() method is called.
+     * @config callback logout_callback A callback to execute as part of the logout process.
      *
      * @var array
      *
@@ -156,12 +155,7 @@ abstract class Solar_Auth_Adapter extends Solar_Base {
      *
      * The available magic properties are ...
      *
-     * - status:  (string)  The Unix time at which the authenticated handle was last
-     *   valid.
-     *
-     * - initial:  (int)  The Unix time at which the handle was initially authenticated.
-     *
-     * - active:  (int)  The status code of the current user authentication. The string
+     * - status:  (int)  The status code of the current user authentication. The string
      *   codes are ...
      *
      *     - Solar_Auth::ANON (or empty): The user is anonymous/unauthenticated (no attempt to authenticate)
@@ -173,6 +167,11 @@ abstract class Solar_Auth_Adapter extends Solar_Base {
      *     - Solar_Auth::VALID: The user is authenticated and has not timed out
      *
      *     - Solar_Auth::WRONG: The user attempted authentication but failed
+     *
+     * - initial:  (int)  The Unix time at which the handle was initially authenticated.
+     *
+     * - active:  (string)  The Unix time at which the authenticated handle was last
+     *   valid.
      *
      * - handle:  (string) The currently authenticated user handle.
      *
@@ -281,7 +280,7 @@ abstract class Solar_Auth_Adapter extends Solar_Base {
 
     /**
      *
-     * Magic get for pseudo-public properties as defined by [[$_magic]].
+     * Magic get for pseudo-public properties as defined by [[Solar_Auth_Adapter::$_magic]].
      *
      * @param string $key The name of the property to get.
      *
@@ -311,7 +310,7 @@ abstract class Solar_Auth_Adapter extends Solar_Base {
 
     /**
      *
-     * Magic set for pseudo-public properties as defined by [[$_magic]].
+     * Magic set for pseudo-public properties as defined by [[Solar_Auth_Adapter::$_magic]].
      *
      * @param string $key The name of the property to set.
      *
@@ -511,7 +510,7 @@ abstract class Solar_Auth_Adapter extends Solar_Base {
         // reset the session id and delete previous session, but only
         // if a session is actually in place
         if (session_id() !== '' && ! headers_sent()) {
-            session_regenerate_id();
+            session_regenerate_id(true);
         }
 
         // cache any messages

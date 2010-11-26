@@ -66,7 +66,7 @@ class Solar_Sql_Adapter_Mysql extends Solar_Sql_Adapter
         // date & time
         'date'              => 'date',
         'datetime'          => 'timestamp',
-        'timestamp'         => 'int',
+        'timestamp'         => 'timestamp',
         'time'              => 'time',
 
         // string
@@ -154,6 +154,23 @@ class Solar_Sql_Adapter_Mysql extends Solar_Sql_Adapter
 
             // done
             return $this->_pdo_type . ':' . implode(';', $dsn);
+        }
+
+        /**
+         *
+         * Builds the FROM clause for a SELECT command; wraps it in parentheses to
+         * force precedence for MySQL.
+         *
+         * @param array $from The array of FROM clause elements.
+         *
+         * @return string The FROM clause.
+         *
+         */
+        protected function _selectSingleFrom($from)
+        {
+            return "FROM (\n    "
+            . implode(",\n    ", $from) . "\n"
+            . ")\n";
         }
 
         /**

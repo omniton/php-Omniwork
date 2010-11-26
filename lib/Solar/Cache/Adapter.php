@@ -11,7 +11,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: Adapter.php 4442 2010-02-26 16:33:06Z pmjones $
+ * @version $Id: Adapter.php 4552 2010-05-04 21:47:55Z pmjones $
  *
  */
 abstract class Solar_Cache_Adapter extends Solar_Base {
@@ -296,7 +296,7 @@ abstract class Solar_Cache_Adapter extends Solar_Base {
      */
     public function fetchOrSave($key, $callback, $args = array(), $life = null)
     {
-        $this->_fetchOrInsert('save', $key, $callback, $args);
+        $this->_fetchOrInsert('save', $key, $callback, $args, $life);
     }
 
     /**
@@ -339,7 +339,7 @@ abstract class Solar_Cache_Adapter extends Solar_Base {
      */
     public function fetchOrAdd($key, $callback, $args = array(), $life = null)
     {
-        $this->_fetchOrInsert('add', $key, $callback, $args);
+        $this->_fetchOrInsert('add', $key, $callback, $args, $life);
     }
 
     /**
@@ -432,7 +432,7 @@ abstract class Solar_Cache_Adapter extends Solar_Base {
 
     /**
      *
-     * Support method for [[fetchOrSave()]] and [[fetchOrAdd()]].
+     * Support method for `fetchOrSave()` and `fetchOrAdd()`.
      *
      * @param string $method The method to use for inserting created data,
      * typically 'add' or 'save'.

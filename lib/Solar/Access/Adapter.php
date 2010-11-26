@@ -148,8 +148,14 @@ abstract class Solar_Access_Adapter extends Solar_Base
      * @see isOwner()
      *
      */
-    public function isAllowed($class = '*', $action = '*', $object = null)
+    public function isAllowed($spec = '*', $action = '*', $object = null)
     {
+        if (is_object($spec)) {
+            $class = get_class($spec);
+        } else {
+            $class = $spec;
+        }
+
         foreach ($this->list as $info) {
             $class_match   = ($info['class']  == $class  || $info['class']  == '*');
             $action_match  = ($info['action'] == $action || $info['action'] == '*');

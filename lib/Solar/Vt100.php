@@ -13,7 +13,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: Vt100.php 4376 2010-02-11 23:13:07Z pmjones $
+ * @version $Id: Vt100.php 4622 2010-06-30 12:53:52Z pmjones $
  *
  */
 class Solar_Vt100 extends Solar_Base
@@ -94,6 +94,56 @@ class Solar_Vt100 extends Solar_Base
     static public function format($text)
     {
         return strtr($text, self::$_format);
+    }
+
+    /**
+     *
+     * Converts VT100 %-markup to plain text.
+     *
+     * @param string $text The text to strip %-markup from.
+     *
+     * @return string The plain text.
+     *
+     */
+    static public function plain($text)
+    {
+        static $plain = null;
+        if ($plain === null) {
+            $plain = array();
+            foreach (self::$_format as $key => $val) {
+                $plain[$key] = '';
+            }
+            $plain['%%'] = '%';
+        }
+
+        return strtr($text, $plain);
+    }
+
+    /**
+     *
+     * Writes text to a file handle, converting to control codes if the handle
+     * is a posix TTY, or to plain text if not.
+     *
+     * @param resource $handle The file handle.
+     *
+     * @param string $text The text to write to the file handle, converting
+     * %-markup if the handle is a posix TTY, or stripping markup if not.
+     *
+     * @param string $append Append this text as-is when writing to the file
+     * handle; generally useful for adding newlines.
+     *
+     * @return void
+     *
+     */
+    static public function write($handle, $text, $append = null)
+    {
+        if (function_exists('posix_isatty') && posix_isatty($handle)) {
+            // it's a tty, safe to use markup
+            fwrite($handle, self::format($text) . $append);
+        } else {
+            // not posix or not a tty, use plain text
+            fwrite($handle, self::plain($text) . $append);
+        }
     }
 
     /**

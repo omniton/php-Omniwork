@@ -337,6 +337,19 @@ class Solar_Request extends Solar_Base
 
     /**
      *
+     * Is this a secure SSL request?
+     *
+     * @return bool
+     *
+     */
+    public function isSsl()
+    {
+        return $this->server('HTTPS') == 'on'
+        || $this->server('SERVER_PORT') == 443;
+    }
+
+    /**
+     *
      * Is this a command-line request?
      *
      * @return bool
@@ -505,7 +518,7 @@ class Solar_Request extends Solar_Base
         foreach ($this->server as $key => $val) {
 
             // only retain HTTP headers
-            if (substr($key, 0, 4) == 'HTTP') {
+            if (substr($key, 0, 5) == 'HTTP_') {
 
                 // normalize the header key to lower-case
                 $nicekey = strtolower(

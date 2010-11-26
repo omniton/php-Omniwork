@@ -11,7 +11,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: MakeModel.php 4436 2010-02-25 21:38:34Z pmjones $
+ * @version $Id: MakeModel.php 4597 2010-06-15 21:11:48Z pmjones $
  *
  */
 class Solar_Cli_MakeModel extends Solar_Controller_Command
@@ -109,6 +109,12 @@ class Solar_Cli_MakeModel extends Solar_Controller_Command
             throw $this->_exception('ERR_NO_CLASS');
         }
 
+        // are we making multiple classes?
+        if (substr($class, -2) == '_*') {
+            $prefix = substr($class, 0, -2);
+            return $this->_execMulti($prefix);
+        }
+
         $this->_outln("Making model '$class'.");
 
         // load the templates
@@ -145,6 +151,37 @@ class Solar_Cli_MakeModel extends Solar_Controller_Command
 
         // done!
         $this->_outln('Done.');
+    }
+
+    /**
+     *
+     * Makes one model/record/collection class for each table in the database
+     * using a class-name prefix.
+     *
+     * @param string $prefix The prefix for each model class name.
+     *
+     * @return void
+     *
+     */
+    protected function _execMulti($prefix)
+    {
+        $this->_outln("Making one '$prefix' class for each table in the database.");
+
+        // get the list of tables
+        $this->_out('Connecting to database for table list ... ');
+        $sql = Solar::factory('Solar_Sql', $this->_getSqlConfig());
+        $this->_outln('connected.');
+        $list = $sql->fetchTableList();
+        $this->_outln('Found ' . count($list) . ' tables.');
+
+        // process each table in turn
+        $inflect = Solar_Registry::get('inflect');
+        foreach ($list as $table) {
+            $name = $inflect->underToStudly($table);
+            $class = "{$prefix}_$name";
+            $this->_outln("Using table '$table' to make class '$class'.");
+            $this->_exec($class);
+        }
     }
 
     /**
@@ -421,7 +458,7 @@ class Solar_Cli_MakeModel extends Solar_Controller_Command
             return;
         }
 
-        $this->_out('Connecting to database for metadata ...');
+        $this->_out('Connecting to database for metadata ... ');
         $sql = Solar::factory('Solar_Sql', $this->_getSqlConfig());
         $this->_outln('connected.');
 

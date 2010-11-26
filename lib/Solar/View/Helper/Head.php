@@ -13,10 +13,10 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: Head.php 4285 2009-12-31 02:18:15Z pmjones $
+ * @version $Id: Head.php 4610 2010-06-19 09:06:38Z pmjones $
  *
  */
-class Solar_View_Adapter_Helper_Head extends Solar_View_Helper
+class Solar_View_Helper_Head extends Solar_View_Helper
 {
     /**
      *
@@ -35,6 +35,15 @@ class Solar_View_Adapter_Helper_Head extends Solar_View_Helper
      *
      */
     protected $_title = null;
+
+    /**
+     *
+     * Whether or not the title should be output raw.
+     *
+     * @var string
+     *
+     */
+    protected $_title_raw = false;
 
     /**
      *
@@ -191,6 +200,21 @@ class Solar_View_Adapter_Helper_Head extends Solar_View_Helper
     public function getTitle()
     {
         return $this->_title;
+    }
+
+    /**
+     *
+     * Turn off/on escaping for the title.
+     *
+     * @param bool $flag True to turn off escaping, false to leave escaping on.
+     *
+     * @return Solar_View_Helper_Head
+     *
+     */
+    public function setTitleRaw($flag)
+    {
+        $this->_title_raw = (bool) $flag;
+        return $this;
     }
 
     /**
@@ -404,7 +428,7 @@ class Solar_View_Adapter_Helper_Head extends Solar_View_Helper
 
         // title
         if (! empty($this->_title)) {
-            $html[] = $this->_view->title($this->_title);
+            $html[] = $this->_view->title($this->_title, $this->_title_raw);
         }
 
         // metas

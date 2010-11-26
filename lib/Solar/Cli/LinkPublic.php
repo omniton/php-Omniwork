@@ -12,7 +12,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: LinkPublic.php 4416 2010-02-23 19:52:43Z pmjones $
+ * @version $Id: LinkPublic.php 4553 2010-05-05 01:28:46Z pmjones $
  *
  */
 class Solar_Cli_LinkPublic extends Solar_Controller_Command
@@ -94,11 +94,16 @@ class Solar_Cli_LinkPublic extends Solar_Controller_Command
         // make the symlink
         $this->_out("    Making public symlink for $class ... ");
         try {
-            Solar_Symlink::make($src, $tgt, $dir);
-            $this->_outln('done.');
+            $err = Solar_Symlink::make($src, $tgt, $dir);
+            if ($err) {
+                $this->_outln("failed.");
+                $this->_errln("    $err");
+            } else {
+                $this->_outln("done.");
+            }
         } catch (Exception $e) {
-            $this->_out($e->getMessage());
-            $this->_outln(' ... failed.');
+            $this->_outln('failed.');
+            $this->_errln('    ' . $e->getMessage());
         }
     }
 }

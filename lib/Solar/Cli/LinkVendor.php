@@ -11,7 +11,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: LinkVendor.php 4490 2010-03-02 15:51:00Z pmjones $
+ * @version $Id: LinkVendor.php 4697 2010-09-12 23:41:46Z pmjones $
  *
  * @todo Make Vendor_App_Hello, Vendor_Cli_Help.  Also make Vendor_App_Base
  * and Vendor_Cli_Base?
@@ -114,14 +114,23 @@ class Solar_Cli_LinkVendor extends Solar_Controller_Command
             // $dir, $src, $tgt
             extract($link);
 
-            // make it
+            // fix for windows
+            $dir = str_replace('/', DIRECTORY_SEPARATOR, $dir);
+            $src = str_replace('/', DIRECTORY_SEPARATOR, $src);
+            $tgt = str_replace('/', DIRECTORY_SEPARATOR, $tgt);
+
             $this->_out("    Making link '$dir/$tgt' ... ");
             try {
-                Solar_Symlink::make($src, $tgt, "$system/$dir");
-                $this->_outln("done.");
+                $err = Solar_Symlink::make($src, $tgt, "$system/$dir");
+                if ($err) {
+                    $this->_outln("failed.");
+                    $this->_errln("    $err");
+                } else {
+                    $this->_outln("done.");
+                }
             } catch (Exception $e) {
-                $this->_out($e->getMessage());
-                $this->_outln(" ... failed.");
+                $this->_outln("failed.");
+                $this->_errln('    ' . $e->getMessage());
             }
         }
 

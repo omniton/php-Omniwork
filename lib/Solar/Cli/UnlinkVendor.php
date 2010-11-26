@@ -11,7 +11,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: UnlinkVendor.php 4490 2010-03-02 15:51:00Z pmjones $
+ * @version $Id: UnlinkVendor.php 4701 2010-09-14 01:21:36Z pmjones $
  *
  * @todo Make Vendor_App_Hello, Vendor_Cli_Help.  Also make Vendor_App_Base
  * and Vendor_Cli_Base?
@@ -85,8 +85,12 @@ class Solar_Cli_UnlinkVendor extends Solar_Controller_Command
         foreach ($links as $link) {
             $this->_out("    Removing '$link' ... ");
             $path = "$system/$link";
-            if (Solar_File::exists($path)) {
-                unlink($path);
+
+            // fix for windows
+            $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+
+            if (Solar_File::exists($path) || Solar_Dir::exists($path)) {
+                Solar_Symlink::remove($path);
                 $this->_outln("done.");
             } else {
                 $this->_outln("missing.");

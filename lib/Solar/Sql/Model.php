@@ -16,7 +16,7 @@
  *
  * @license http://opensource.org/licenses/bsd-license.php BSD
  *
- * @version $Id: Model.php 4489 2010-03-02 15:34:14Z pmjones $
+ * @version $Id: Model.php 4694 2010-09-06 14:33:18Z pmjones $
  *
  */
 abstract class Solar_Sql_Model extends Solar_Base
@@ -1571,9 +1571,6 @@ abstract class Solar_Sql_Model extends Solar_Base
         $data
         );
 
-        // clear the cache for this model and related models
-        $this->_cache->deleteAll();
-
         // does the table have an autoincrement column?
         $autoinc = null;
         foreach ($this->_table_cols as $name => $info) {
@@ -1585,7 +1582,14 @@ abstract class Solar_Sql_Model extends Solar_Base
 
         // return the last insert id, or just "true" ?
         if ($autoinc) {
-            return $this->_sql->lastInsertId($this->_table_name, $autoinc);
+            $id = $this->_sql->lastInsertId($this->_table_name, $autoinc);
+        }
+
+        // clear the cache for this model and related models
+        $this->_cache->deleteAll();
+
+        if ($autoinc) {
+            return $id;
         } else {
             return true;
         }

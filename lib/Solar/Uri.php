@@ -335,6 +335,18 @@ class Solar_Uri extends Solar_Base
 
     /**
      *
+     * Converts the URI object to a string and returns it.
+     *
+     * @return string The full URI this object represents.
+     *
+     */
+    public function __toString()
+    {
+        return $this->get(true);
+    }
+
+    /**
+     *
      * Implements the virtual $query property.
      *
      * @param string $key The virtual property to set.
@@ -384,10 +396,7 @@ class Solar_Uri extends Solar_Base
     public function set($uri = null)
     {
         // build a default scheme (with '://' in it)
-        $is_ssl = $this->_request->server('HTTPS') == 'on'
-        || $this->_request->server('SERVER_PORT') == 443;
-
-        $scheme = (($is_ssl) ? 'https' : 'http') . '://';
+        $scheme = $this->_request->isSsl() ? 'https://' : 'http://';
 
         // get the current host, using a dummy host name if needed.
         // we need a host name so that parse_url() works properly.
