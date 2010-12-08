@@ -331,7 +331,7 @@ class Solar
      */
     public static function apiVersion()
     {
-        return '1.0.0';
+        return '1.1.2';
     }
 
     /**

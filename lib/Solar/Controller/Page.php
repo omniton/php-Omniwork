@@ -140,7 +140,7 @@ abstract class Solar_Controller_Page extends Solar_Base
      * @var string
      *
      */
-    protected $_layout_default = 'default';
+    protected $_layout_default = 'master';
 
     /**
      *

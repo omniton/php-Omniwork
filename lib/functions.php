@@ -1,8 +1,20 @@
 <?php
 
-function array_value(&$array, $value)
+function array_value($array, $value)
 {
-    return (isset($array[$value]) ? $array[$value] : null);
+    if (is_array($value)) {
+        $subArray = $array;
+        foreach ($value as $i => $v) {
+            if (is_array($subArray) && isset($subArray[$v])) {
+                $subArray = $subArray[$v];
+            } else {
+                return null;
+            }
+        }
+        return $subArray;
+    } else {
+        return (is_array($array) && isset($array[$value]) ? $array[$value] : null);
+    }
 }
 
 function unix_random_value($bytes = 16)
