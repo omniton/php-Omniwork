@@ -38,7 +38,7 @@ class Solar_Plugin extends Solar_Base
 
                 // execute plugin for each subevent
                 foreach ((array)$plugin['events_map'][$event] as $subEvent) {
-                    $result = $obj->execute($controller, $subEvent, $params);
+                    $result = $obj->execute($controller, $event, $subEvent, $params);
 
                     switch ($type) {
                         case self::EXECUTE_ALL:
