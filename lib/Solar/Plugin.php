@@ -1,14 +1,14 @@
 <?php
 class Solar_Plugin extends Solar_Base
 {
-    protected $_Solar_Plugin = array();
+    protected
+    $_Solar_Plugin = array(),
+    $_pluginObjects = array();
 
     const
     EXECUTE_ALL = 0,
     EXECUTE_WHILE_TRUE = 1,
     EXECUTE_WHILE_FALSE = 2;
-
-    static $_pluginObjects = array();
 
     public function execute($controller, $event, $params = array(), $type = self::EXECUTE_ALL)
     {
@@ -25,15 +25,16 @@ class Solar_Plugin extends Solar_Base
             case self::EXECUTE_ALL:
                 $return = array();
         }
+        $controllerClassName = get_class($controller);
         $plugins = array_value($this->_config, get_class($controller));
 
-        foreach ((array)$plugins as $plugin) {
+        foreach ((array)$plugins as $pluginName => $plugin) {
             if (array_value($plugin, array('events_map', $event)) && !empty($plugin['class'])) {
-                if (empty(Solar_Plugin::$_pluginObjects[$plugin['class']])) {
+                if (!array_value($this->_pluginObjects, array($controllerClassName, $pluginName))) {
                     $obj = Solar::factory($plugin['class'], array_value($plugin, 'config'));
-                    Solar_Plugin::$_pluginObjects[$plugin['class']] = $obj;
+                    $this->_pluginObjects[$controllerClassName][$pluginName] = $obj;
                 } else {
-                    $obj = Solar_Plugin::$_pluginObjects[$plugin['class']];
+                    $obj = $this->_pluginObjects[$controllerClassName][$pluginName];
                 }
 
                 // execute plugin for each subevent
