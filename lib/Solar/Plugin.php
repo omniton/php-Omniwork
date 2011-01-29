@@ -26,7 +26,7 @@ class Solar_Plugin extends Solar_Base
                 $return = array();
         }
         $controllerClassName = get_class($controller);
-        $plugins = array_value($this->_config, get_class($controller));
+        $plugins = array_value($this->_config, $controllerClassName);
 
         foreach ((array)$plugins as $pluginName => $plugin) {
             if (array_value($plugin, array('events_map', $event)) && !empty($plugin['class'])) {
