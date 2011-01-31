@@ -329,11 +329,18 @@ class Solar_Session extends Solar_Base
         }
 
         // start the session
-        if (in_array($this->_config['name'], $_COOKIE)) {
+        $sessionId = false;
+        if (array_key_exists($this->_config['name'], $_COOKIE)) {
             $sessionId = $_COOKIE[$this->_config['name']];
-            if (!$sessionId || preg_replace('/[a-z0-9-]/i', null, $sessionId)) {
-                unset($_COOKIE[$this->_config['name']]);
-            }
+        } elseif (array_key_exists($this->_config['name'], $_GET)) {
+            $sessionId = $_GET[$this->_config['name']];
+        } elseif (array_key_exists($this->_config['name'], $_POST)) {
+            $sessionId = $_POST[$this->_config['name']];
+        }
+        if ($sessionId !== false && !preg_match('/^[a-z0-9-]+$/', $sessionId)) {
+            unset($_COOKIE[$this->_config['name']]);
+            unset($_GET[$this->_config['name']]);
+            unset($_POST[$this->_config['name']]);
         }
         session_start();
 
