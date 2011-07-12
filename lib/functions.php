@@ -1,19 +1,19 @@
 <?php
 
-function array_value($array, $value)
+function array_value($array, $key, $default = null)
 {
-    if (is_array($value)) {
+    if (is_array($key)) {
         $subArray = $array;
-        foreach ($value as $i => $v) {
+        foreach ($key as $i => $v) {
             if (is_array($subArray) && isset($subArray[$v])) {
                 $subArray = $subArray[$v];
             } else {
-                return null;
+                return $default;
             }
         }
         return $subArray;
     } else {
-        return (is_array($array) && isset($array[$value]) ? $array[$value] : null);
+        return (is_array($array) && isset($array[$key]) ? $array[$key] : $default);
     }
 }
 
