@@ -1450,7 +1450,9 @@ abstract class Solar_Controller_Page extends Solar_Base
         $this->_errors[] = 'ERR_CSRF_ATTEMPT';
         $vars = $this->_request->post();
         foreach ((array) $vars as $key => $val) {
-            $this->_errors[] = "$key: $val";
+            if (!is_array($val)) {
+                $this->_errors[] = "$key: $val";
+            }
         }
 
         $this->_response->setStatusCode(403);

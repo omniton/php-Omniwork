@@ -31,13 +31,19 @@ class Solar_View_Helper_Message extends Solar_View_Helper
      * @return string An message.
      *
      */
-    public function message()
+    public function message($fetch = false)
     {
         $session = Solar_Registry::get('session');
-
-        if ($session->hasFlash('message')) {
-            echo '<div class="' . $session->getFlash('messageType') . '">' . $session->getFlash('message') . '</div>';
+        if (!$fetch) {
+            return $session->hasFlash('message');
         }
-        return null;
+
+        $aMessage = array('message' => null, 'type' => null);
+        if ($session->hasFlash('message')) {
+            $aMessage['message'] = $session->getFlash('message');
+            $type = $session->getFlash('messageType');
+            $aMessage['type'] = $type ? $type : 'error';
+        }
+        return $aMessage;
     }
 }
