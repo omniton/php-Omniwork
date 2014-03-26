@@ -28,4 +28,3 @@ Solar_Registry::get('controller_front')->display();
 
 // Done!
 Solar::stop();
-?>
