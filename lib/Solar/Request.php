@@ -345,7 +345,8 @@ class Solar_Request extends Solar_Base
     public function isSsl()
     {
         return $this->server('HTTPS') == 'on'
-        || $this->server('SERVER_PORT') == 443;
+        || $this->server('SERVER_PORT') == 443
+        || strtolower($this->server('X-Forwarded-Proto')) == 'https';
     }
 
     /**
